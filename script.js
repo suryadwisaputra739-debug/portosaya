@@ -1,30 +1,28 @@
 // ============================================
-// NEON CYBERPUNK PORTFOLIO JS
+// PREMIUM PORTFOLIO - INTERACTIVE EFFECTS
 // ============================================
 
 // ============================================
-// DARK MODE TOGGLE
+// THEME TOGGLE
 // ============================================
 
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
+const themeBtn = document.getElementById('themeBtn');
+const html = document.documentElement;
 
-// Check saved theme
 const savedTheme = localStorage.getItem('theme') || 'dark';
-body.setAttribute('data-theme', savedTheme);
+html.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme);
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = body.getAttribute('data-theme');
+themeBtn.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    body.setAttribute('data-theme', newTheme);
+    html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
 });
 
 function updateThemeIcon(theme) {
-    const icon = themeToggle.querySelector('i');
+    const icon = themeBtn.querySelector('i');
     if (theme === 'light') {
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
@@ -35,47 +33,46 @@ function updateThemeIcon(theme) {
 }
 
 // ============================================
-// 3D ID CARD EFFECT - MOUSE TRACKING
+// 3D CARD MOUSE TRACKING
 // ============================================
 
-const idCard = document.getElementById('idCard');
+const profileCard = document.getElementById('profileCard');
 
 document.addEventListener('mousemove', (e) => {
-    const rect = idCard.getBoundingClientRect();
+    if (!profileCard) return;
+    
+    const rect = profileCard.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    const xAxis = (centerX - e.pageX) / 30;
-    const yAxis = (centerY - e.pageY) / 30;
+    const rotateX = (e.clientY - centerY) / 30;
+    const rotateY = (centerX - e.clientX) / 30;
     
-    idCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    profileCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 });
 
-idCard.addEventListener('mouseenter', () => {
-    idCard.style.transition = 'none';
-});
-
-idCard.addEventListener('mouseleave', () => {
-    idCard.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
-    idCard.style.transform = 'rotateY(0) rotateX(0)';
+document.addEventListener('mouseleave', () => {
+    if (profileCard) {
+        profileCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    }
 });
 
 // ============================================
 // SMOOTH SCROLL NAVIGATION
 // ============================================
 
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
+        const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
 
 // ============================================
-// SCROLL ANIMATIONS
+// INTERSECTION OBSERVER - SCROLL ANIMATIONS
 // ============================================
 
 const observerOptions = {
@@ -86,87 +83,69 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            entry.target.style.opacity = '1';
+            entry.target.style.animation = 'slideUp 0.6s ease-out';
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('.section, .glass-effect').forEach(el => {
-    observer.observe(el);
+// Observe skill bars
+document.querySelectorAll('.skill-fill').forEach(bar => {
+    bar.style.opacity = '0';
+    observer.observe(bar);
 });
 
-// ============================================
-// SKILL PROGRESS ANIMATION
-// ============================================
-
-const progressBars = document.querySelectorAll('.skill-progress');
-
-const progressObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const bar = entry.target;
-            const width = bar.style.width;
-            bar.style.width = '0';
-            
-            setTimeout(() => {
-                bar.style.transition = 'width 1.5s ease-out';
-                bar.style.width = width;
-            }, 100);
-            
-            progressObserver.unobserve(bar);
-        }
-    });
-}, { threshold: 0.5 });
-
-progressBars.forEach(bar => {
-    progressObserver.observe(bar);
+document.querySelectorAll('.project-card').forEach(card => {
+    card.style.opacity = '0';
+    observer.observe(card);
 });
 
 // ============================================
 // BUTTON INTERACTIONS
 // ============================================
 
-const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+const exploreBtn = document.querySelector('.btn-primary');
+if (exploreBtn) {
+    exploreBtn.addEventListener('click', () => {
+        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    });
+}
 
-buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (btn.textContent.includes('EXPLORE')) {
-            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-        } else if (btn.textContent.includes('CV')) {
-            window.open('cv.pdf', '_blank');
+// ============================================
+// NAVBAR ACTIVE LINK
+// ============================================
+
+const navLinks = document.querySelectorAll('.nav-menu a');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
         }
     });
 });
 
 // ============================================
-// PARALLAX EFFECT ON SCROLL
-// ============================================
-
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const glows = document.querySelectorAll('.glow-1, .glow-2, .glow-3');
-    
-    glows.forEach((glow, index) => {
-        glow.style.transform = `translateY(${scrolled * (0.5 + index * 0.1)}px)`;
-    });
-});
-
-// ============================================
-// CONSOLE MESSAGE
+// CONSOLE EASTER EGG
 // ============================================
 
 console.log(
-    `%c
-    ███████╗██╗   ██╗██████╗ ██╗   ██╗ █████╗ 
-    ██╔════╝██║   ██║██╔══██╗╚██╗ ██╔╝██╔══██╗
-    ███████╗██║   ██║██████╔╝ ╚████╔╝ ███████║
-    ╚════██║██║   ██║██╔══██╗  ╚██╔╝  ██╔══██║
-    ███████║╚██████╔╝██║  ██║   ██║   ██║  ██║
-    ╚══════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
-    `,
-    'color: #00d4ff; font-family: monospace; font-weight: bold; text-shadow: 0 0 10px #00d4ff;'
+    '%c✨ Welcome to Surya\'s Portfolio ✨',
+    'color: #6366f1; font-size: 16px; font-weight: bold;'
 );
-
-console.log('%cWelcome to Cyberpunk Portfolio!', 'color: #ff006e; font-size: 16px; font-weight: bold;');
-console.log('%c@sryaasptraa | +62 857 3081 9709', 'color: #00d4ff; font-size: 12px;');
+console.log(
+    '%cLet\'s create something amazing together!',
+    'color: #ec4899; font-size: 12px;'
+);

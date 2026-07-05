@@ -3,292 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surya Dwi Saputra - Cyberpunk Portfolio</title>
+    <title>Surya Dwi Saputra - Premium Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="bg-animation">
-        <div class="glow-1"></div>
-        <div class="glow-2"></div>
-        <div class="glow-3"></div>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-logo">
-                <span class="logo-text">
-                    <span class="text-cyan">S</span><span class="text-magenta">D</span>
-                </span>
-                <span class="logo-subtitle">SURYA.DEV</span>
+        <div class="nav-wrapper">
+            <div class="logo">
+                <span class="logo-main">SD</span>
+                <span class="logo-sub">PORTFOLIO</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#hero" class="nav-link">HOME</a></li>
-                <li><a href="#about" class="nav-link">ABOUT</a></li>
-                <li><a href="#skills" class="nav-link">SKILLS</a></li>
-                <li><a href="#portfolio" class="nav-link">PORTFOLIO</a></li>
-                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="theme-toggle" id="themeToggle">
+            <button class="theme-btn" id="themeBtn">
                 <i class="fas fa-moon"></i>
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="text-cyan">SURYA</span>
-                    <br>
-                    <span class="text-magenta">DWI SAPUTRA</span>
-                </h1>
-                <p class="hero-subtitle">OFFICE ADMINISTRATION • STUDENT • INNOVATOR</p>
-                <p class="hero-description">
-                    Crafting digital excellence through administration, creativity, and modern technology
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn-primary">EXPLORE NOW</button>
-                    <button class="btn-secondary">DOWNLOAD CV</button>
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="word">Creative</span>
+                        <span class="word">Developer</span>
+                        <span class="word">& Admin</span>
+                    </h1>
+                    <p class="hero-subtitle">Office Administration Student | Creative Problem Solver</p>
+                    <p class="hero-description">
+                        I craft elegant digital experiences through careful attention to detail, 
+                        modern design principles, and strategic administration excellence.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary">Explore My Work</button>
+                        <a href="cv.pdf" class="btn btn-secondary" download>Download CV</a>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="lanyard-container">
-                    <div class="lanyard-strap"></div>
-                    <div class="lanyard-connector"></div>
-                    <div class="id-card" id="idCard">
-                        <div class="card-header">04</div>
-                        <div class="card-photo">
-                            <img src="profile.png" alt="Surya Dwi Saputra">
+
+                <div class="hero-visual">
+                    <div class="card-wrapper">
+                        <div class="lanyard"></div>
+                        <div class="card" id="profileCard">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="card-header">
+                                        <div class="header-accent"></div>
+                                        <span class="badge">ADMIN</span>
+                                    </div>
+                                    <div class="card-image">
+                                        <img src="profile.png" alt="Surya Dwi Saputra">
+                                    </div>
+                                    <div class="card-footer">
+                                        <p class="name">SURYA DWI SAPUTRA</p>
+                                        <p class="role">Office Administration</p>
+                                    </div>
+                                    <div class="card-glow"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-info">
-                            <p class="card-name">SURYA DWI</p>
-                            <p class="card-title">ADMIN STUDENT</p>
-                        </div>
-                        <div class="card-badge">◆</div>
-                        <div class="card-shimmer"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="scroll-indicator">
-            <span>SCROLL DOWN</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <i class="fas fa-arrow-down"></i>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="section-header">
-            <h2><span class="text-cyan">/</span> ABOUT <span class="text-magenta">ME</span></h2>
-            <div class="header-line"></div>
-        </div>
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <div class="underline"></div>
+            </div>
 
-        <div class="about-content">
             <div class="about-grid">
-                <div class="about-card glass-effect">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>EDUCATION</h3>
-                    <p>Universitas Negeri Surabaya<br>Office Administration Education<br>Semester 3</p>
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education</h3>
+                    <p>Universitas Negeri Surabaya</p>
+                    <p class="small">Office Administration Education<br>Active Student</p>
                 </div>
-                <div class="about-card glass-effect">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>EXPERIENCE</h3>
-                    <p>PT Loket Premium Game Indonesia<br>Customer Service & Admin<br>~6 Months</p>
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Experience</h3>
+                    <p>PT Loket Premium Game Indonesia</p>
+                    <p class="small">Customer Service & Admin<br>~6 Months</p>
                 </div>
-                <div class="about-card glass-effect">
-                    <i class="fas fa-code"></i>
-                    <h3>SPECIALITY</h3>
-                    <p>Office Management<br>Business Communication<br>Team Leadership</p>
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>Pétanque Champion</p>
+                    <p class="small">Top 10 Student<br>3x OSIS Member</p>
                 </div>
             </div>
 
             <div class="about-text">
                 <p>
-                    Active undergraduate student with real-world experience in administration and customer service. 
-                    Passionate about organizational excellence and modern technology integration. Ready to contribute 
-                    professionally in dynamic environments.
+                    I'm an undergraduate student passionate about office administration and organizational excellence. 
+                    With hands-on experience in customer service and administrative management, I've developed strong 
+                    skills in team collaboration, business communication, and innovative problem-solving.
                 </p>
-                <div class="stats-row">
-                    <div class="stat">
-                        <span class="stat-number text-cyan">3+</span>
-                        <span class="stat-label">Semesters</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number text-magenta">2</span>
-                        <span class="stat-label">Internships</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number text-cyan">6+</span>
-                        <span class="stat-label">Skills</span>
-                    </div>
-                </div>
+                <p>
+                    My journey has taught me the importance of precision, professionalism, and continuous growth. 
+                    I thrive in dynamic environments where I can contribute meaningfully to organizational success.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section skills" id="skills">
-        <div class="section-header">
-            <h2><span class="text-magenta">$</span> SKILLS <span class="text-cyan">&</span> EXPERTISE</h2>
-            <div class="header-line"></div>
-        </div>
-
-        <div class="skills-grid">
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-cyan">
-                    <i class="fas fa-file-excel"></i>
-                </div>
-                <h3>Microsoft Office</h3>
-                <p>Advanced proficiency in Word, Excel, PowerPoint</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 90%"></div>
-                </div>
+    <section class="skills" id="skills">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Core Competencies</h2>
+                <div class="underline"></div>
             </div>
 
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-magenta">
-                    <i class="fas fa-microphone"></i>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h4>Technical</h4>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Microsoft Office Suite</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Data Management</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Business Analysis</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3>Communication</h3>
-                <p>Professional presentation & public speaking</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 95%"></div>
-                </div>
-            </div>
 
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-cyan">
-                    <i class="fas fa-crown"></i>
+                <div class="skill-group">
+                    <h4>Professional</h4>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Leadership & Team Management</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Communication & Presentation</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 96%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Problem Solving</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 91%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3>Leadership</h3>
-                <p>Team management & project coordination</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 88%"></div>
-                </div>
-            </div>
 
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-magenta">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Administration</h3>
-                <p>Data management & business organization</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 92%"></div>
-                </div>
-            </div>
-
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-cyan">
-                    <i class="fas fa-people-group"></i>
-                </div>
-                <h3>Teamwork</h3>
-                <p>Collaboration & cooperative work ethic</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 96%"></div>
-                </div>
-            </div>
-
-            <div class="skill-item glass-effect">
-                <div class="skill-icon text-magenta">
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3>Adaptability</h3>
-                <p>Quick learner & flexible problem solver</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 94%"></div>
+                <div class="skill-group">
+                    <h4>Personal</h4>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Adaptability & Flexibility</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Attention to Detail</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 97%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Creativity & Innovation</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 89%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio/Projects Section -->
-    <section class="section portfolio" id="portfolio">
-        <div class="section-header">
-            <h2><span class="text-cyan">@</span> FEATURED <span class="text-magenta">ACHIEVEMENTS</span></h2>
-            <div class="header-line"></div>
-        </div>
-
-        <div class="achievements-grid">
-            <div class="achievement-card glass-effect">
-                <div class="achievement-icon text-cyan">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <h3>PÉTANQUE CHAMPION</h3>
-                <p>1st Place Regional Competition</p>
-                <span class="achievement-year">2024</span>
+    <!-- Projects/Achievements Section -->
+    <section class="projects" id="projects">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Achievements & Highlights</h2>
+                <div class="underline"></div>
             </div>
 
-            <div class="achievement-card glass-effect">
-                <div class="achievement-icon text-magenta">
-                    <i class="fas fa-medal"></i>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Regional Champion</h3>
+                    <p class="project-meta">Pétanque Competition 2024</p>
+                    <p>Demonstrated exceptional teamwork, strategic thinking, and competitive excellence.</p>
                 </div>
-                <h3>STUDENT COUNCIL</h3>
-                <p>OSIS Member 3 Consecutive Years</p>
-                <span class="achievement-year">2022-2025</span>
-            </div>
 
-            <div class="achievement-card glass-effect">
-                <div class="achievement-icon text-cyan">
-                    <i class="fas fa-book"></i>
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Academic Excellence</h3>
+                    <p class="project-meta">Top 10 Students 2022-2025</p>
+                    <p>Consistent academic performer with strong commitment to educational excellence.</p>
                 </div>
-                <h3>HONOR STUDENT</h3>
-                <p>Top 10 Best Students Grades 10-12</p>
-                <span class="achievement-year">2022-2025</span>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Leadership Experience</h3>
+                    <p class="project-meta">Student Council Member 3 Years</p>
+                    <p>Active leadership role in student organization with proven management capabilities.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Professional Experience</h3>
+                    <p class="project-meta">PT Loket Premium Game Indonesia</p>
+                    <p>Customer service excellence and administrative precision in dynamic corporate environment.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Field Work Internship</h3>
+                    <p class="project-meta">6 Months PKL Program</p>
+                    <p>Practical experience in customer interaction, data management, and daily operations.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Continuous Growth</h3>
+                    <p class="project-meta">Lifelong Learning Commitment</p>
+                    <p>Dedicated to professional development and mastering new skills for career excellence.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="section-header">
-            <h2><span class="text-magenta">#</span> GET IN <span class="text-cyan">TOUCH</span></h2>
-            <div class="header-line"></div>
-        </div>
-
-        <div class="contact-content">
-            <div class="contact-info">
-                <a href="https://wa.me/6285730819709" class="contact-item glass-effect">
-                    <i class="fab fa-whatsapp text-cyan"></i>
-                    <span>+62 857 3081 9709</span>
-                </a>
-                <a href="mailto:suryadwisaputra739@gmail.com" class="contact-item glass-effect">
-                    <i class="fas fa-envelope text-magenta"></i>
-                    <span>suryadwisaputra739@gmail.com</span>
-                </a>
-                <div class="contact-item glass-effect">
-                    <i class="fas fa-map-marker-alt text-cyan"></i>
-                    <span>Surabaya, East Java, Indonesia</span>
-                </div>
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Let's Connect</h2>
+                <div class="underline"></div>
             </div>
 
-            <div class="social-links">
-                <a href="https://www.instagram.com/sryaasptraa" class="social-icon text-cyan" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/surya-dwi-saputra-48396b37a" class="social-icon text-magenta" title="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.tiktok.com/@sryaasptraa" class="social-icon text-cyan" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="cv.pdf" download class="social-icon text-magenta" title="Download CV">
-                    <i class="fas fa-download"></i>
-                </a>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Feel free to reach out for collaborations, opportunities, or just a friendly hello!</p>
+
+                    <div class="contact-items">
+                        <a href="https://wa.me/6285730819709" class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <span class="label">WhatsApp</span>
+                                <span class="value">+62 857 3081 9709</span>
+                            </div>
+                        </a>
+
+                        <a href="mailto:suryadwisaputra739@gmail.com" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="label">Email</span>
+                                <span class="value">suryadwisaputra739@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="label">Location</span>
+                                <span class="value">Surabaya, East Java, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-social">
+                    <h3>Follow Me</h3>
+                    <p>Connect with me on social platforms</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/sryaasptraa" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/surya-dwi-saputra-48396b37a" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@sryaasptraa" class="social-link" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="cv.pdf" class="social-link" title="Download CV" download>
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 SURYA DWI SAPUTRA | ALL RIGHTS RESERVED</p>
-        <p>CRAFTED WITH <span class="text-magenta">❤</span> & CYBERPUNK VIBES</p>
+        <p>&copy; 2026 Surya Dwi Saputra. Crafted with care and precision.</p>
     </footer>
 
     <script src="script.js"></script>
