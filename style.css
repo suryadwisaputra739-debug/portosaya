@@ -219,12 +219,13 @@ body {
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2em, 8vw, 4.5em);
+    font-size: clamp(2.2em, 9vw, 5em);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
     color: var(--text);
     perspective: 1000px;
+    letter-spacing: -2px;
 }
 
 .title-word {
@@ -261,13 +262,14 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.1em;
+    font-size: 1.05em;
     color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 2rem;
-    max-width: 500px;
+    max-width: 550px;
     transform-style: preserve-3d;
     animation: slideUp 1s ease-out 0.4s backwards;
+    letter-spacing: 0.3px;
 }
 
 .hero-cta {
@@ -328,13 +330,7 @@ body {
     position: relative;
     width: 300px;
     height: 350px;
-    perspective: 1000px;
-    animation: rotateProfile 20s infinite linear;
-}
-
-@keyframes rotateProfile {
-    0% { transform: rotateY(0deg) rotateZ(0deg); }
-    100% { transform: rotateY(360deg) rotateZ(360deg); }
+    perspective: 1200px;
 }
 
 .profile-card {
@@ -348,6 +344,8 @@ body {
     background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(9, 132, 227, 0.2));
     border: 2px solid rgba(108, 92, 231, 0.3);
     backdrop-filter: blur(10px);
+    transition: all 0.1s ease-out;
+    will-change: transform;
 }
 
 .profile-card img {

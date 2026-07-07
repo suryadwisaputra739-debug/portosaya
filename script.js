@@ -2,6 +2,68 @@
 // 3D PORTFOLIO INTERACTIONS
 // ============================================
 
+// 3D Cursor Tracking for Profile Card
+const profileCard = document.getElementById('profileCard');
+const profileContainer = document.getElementById('profileContainer');
+
+document.addEventListener('mousemove', (e) => {
+    // Profile card cursor tracking
+    if (profileCard && profileContainer) {
+        const rect = profileContainer.getBoundingClientRect();
+        const containerCenterX = rect.left + rect.width / 2;
+        const containerCenterY = rect.top + rect.height / 2;
+        
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        // Calculate distance from center
+        const distanceX = (mouseX - containerCenterX) * 0.05;
+        const distanceY = (mouseY - containerCenterY) * 0.05;
+        
+        // Apply 3D rotation based on cursor position
+        profileCard.style.transform = `
+            perspective(1000px) 
+            rotateX(${-distanceY}deg) 
+            rotateY(${distanceX}deg) 
+            translateZ(40px)
+            scale(1.02)
+        `;
+    }
+    
+    // Other card mouse tracking
+    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+        
+        const distanceX = (e.clientX - cardCenterX) * 0.02;
+        const distanceY = (e.clientY - cardCenterY) * 0.02;
+        
+        if (Math.abs(distanceX) < 50 && Math.abs(distanceY) < 50) {
+            card.style.transform = `perspective(1000px) rotateX(${-distanceY}deg) rotateY(${distanceX}deg)`;
+        }
+    });
+});
+
+// Reset profile card on mouse leave
+document.addEventListener('mouseleave', () => {
+    if (profileCard) {
+        profileCard.style.transform = `
+            perspective(1000px) 
+            rotateX(0) 
+            rotateY(0) 
+            translateZ(0)
+            scale(1)
+        `;
+    }
+    
+    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
+    cards.forEach(card => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    });
+});
+
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -70,34 +132,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// 3D Mouse tracking effect
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const cardCenterX = rect.left + rect.width / 2;
-        const cardCenterY = rect.top + rect.height / 2;
-        
-        const distanceX = (e.clientX - cardCenterX) * 0.02;
-        const distanceY = (e.clientY - cardCenterY) * 0.02;
-        
-        if (Math.abs(distanceX) < 50 && Math.abs(distanceY) < 50) {
-            card.style.transform = `perspective(1000px) rotateX(${-distanceY}deg) rotateY(${distanceX}deg)`;
-        }
-    });
-});
-
-// Reset 3D effect on mouse leave
-document.addEventListener('mouseleave', () => {
-    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
-    cards.forEach(card => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-    });
-});
-
 // Console Message
 console.log('%c🎨 Welcome to Surya\'s 3D Portfolio', 'color: #6c5ce7; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #6c5ce7;');
-console.log('%c✨ Crafting Organizational Excellence in 3D', 'color: #0984e3; font-size: 14px;');
+console.log('%c✨ Move your cursor to interact with the 3D elements!', 'color: #0984e3; font-size: 14px;');
