@@ -1,137 +1,208 @@
 // ============================================
-// 3D PORTFOLIO INTERACTIONS
+// PREMIUM PORTFOLIO INTERACTIONS
 // ============================================
 
-// 3D Cursor Tracking for Profile Card
-const profileCard = document.getElementById('profileCard');
-const profileContainer = document.getElementById('profileContainer');
+// DOM Elements
+const preloader = document.getElementById('preloader');
+const navbar = document.getElementById('navbar');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+const hamburger = document.getElementById('hamburger');
+const scrollProgress = document.getElementById('scrollProgress');
+const backToTop = document.getElementById('backToTop');
+const profileBox = document.getElementById('profileBox');
 
-document.addEventListener('mousemove', (e) => {
-    // Profile card cursor tracking
-    if (profileCard && profileContainer) {
-        const rect = profileContainer.getBoundingClientRect();
-        const containerCenterX = rect.left + rect.width / 2;
-        const containerCenterY = rect.top + rect.height / 2;
-        
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        
-        // Calculate distance from center
-        const distanceX = (mouseX - containerCenterX) * 0.05;
-        const distanceY = (mouseY - containerCenterY) * 0.05;
-        
-        // Apply 3D rotation based on cursor position
-        profileCard.style.transform = `
-            perspective(1000px) 
-            rotateX(${-distanceY}deg) 
-            rotateY(${distanceX}deg) 
-            translateZ(40px)
-            scale(1.02)
-        `;
-    }
-    
-    // Other card mouse tracking
-    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const cardCenterX = rect.left + rect.width / 2;
-        const cardCenterY = rect.top + rect.height / 2;
-        
-        const distanceX = (e.clientX - cardCenterX) * 0.02;
-        const distanceY = (e.clientY - cardCenterY) * 0.02;
-        
-        if (Math.abs(distanceX) < 50 && Math.abs(distanceY) < 50) {
-            card.style.transform = `perspective(1000px) rotateX(${-distanceY}deg) rotateY(${distanceX}deg)`;
+// ============================================
+// PRELOADER
+// ============================================
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        if (preloader) {
+            preloader.style.display = 'none';
         }
-    });
+    }, 1500);
 });
 
-// Reset profile card on mouse leave
-document.addEventListener('mouseleave', () => {
-    if (profileCard) {
-        profileCard.style.transform = `
-            perspective(1000px) 
-            rotateX(0) 
-            rotateY(0) 
-            translateZ(0)
-            scale(1)
-        `;
+// ============================================
+// SCROLL PROGRESS BAR
+// ============================================
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / scrollHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+});
+
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scroll');
+    } else {
+        navbar.classList.remove('scroll');
     }
-    
-    const cards = document.querySelectorAll('.skill-card, .contact-card, .timeline-content');
-    cards.forEach(card => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-    });
 });
 
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
-            e.preventDefault();
-            document.querySelector(href).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+// ============================================
+// ACTIVE NAVIGATION LINK
+// ============================================
+
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
             });
+            
+            const activeLink = document.querySelector('.nav-link[href="#' + sectionId + '"]');
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     });
 });
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
+// ============================================
+// MOBILE HAMBURGER MENU
+// ============================================
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+}
+
+// ============================================
+// SMOOTH SCROLL
+// ============================================
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(href);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+});
+
+// ============================================
+// BACK TO TOP BUTTON
+// ============================================
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+});
+
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// ============================================
+// SCROLL REVEAL ANIMATION
+// ============================================
+
+const revealElements = document.querySelectorAll('.section-header, .about-text, .stat-card, .skill-card, .timeline-item, .project-card, .cert-card, .contact-card');
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            observer.unobserve(entry.target);
         }
     });
-}, observerOptions);
-
-document.querySelectorAll('.skill-card, .timeline-item, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
 });
 
-// Active Navigation
-const navLinks = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('section');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
+revealElements.forEach(element => {
+    observer.observe(element);
 });
 
-// 3D Parallax effect on scroll
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const gradients = document.querySelectorAll('.gradient-1, .gradient-2, .gradient-3');
-    gradients.forEach((gradient, index) => {
-        gradient.style.transform = `translateY(${scrolled * (0.3 + index * 0.15)}px) rotateZ(${scrolled * 0.05}deg)`;
-    });
-});
+// ============================================
+// PROFILE BOX CURSOR TRACKING
+// ============================================
 
-// Console Message
-console.log('%c🎨 Welcome to Surya\'s 3D Portfolio', 'color: #6c5ce7; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #6c5ce7;');
-console.log('%c✨ Move your cursor to interact with the 3D elements!', 'color: #0984e3; font-size: 14px;');
+if (profileBox) {
+    document.addEventListener('mousemove', (e) => {
+        const rect = profileBox.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const distX = (e.clientX - centerX) * 0.03;
+        const distY = (e.clientY - centerY) * 0.03;
+        
+        profileBox.style.transform = 'perspective(1000px) rotateX(' + (-distY) + 'deg) rotateY(' + distX + 'deg)';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        profileBox.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    });
+}
+
+// ============================================
+// LAZY LOADING IMAGES
+// ============================================
+
+const images = document.querySelectorAll('img[loading="lazy"]');
+
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.src;
+                img.style.opacity = '1';
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => {
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+        imageObserver.observe(img);
+    });
+}
+
+// ============================================
+// CONSOLE MESSAGE
+// ============================================
+
+console.log('%c🌟 Welcome to Surya\'s Premium Portfolio', 'color: #667eea; font-size: 20px; font-weight: bold;');
+console.log('%c✨ Designed with elegance, precision, and modern animations', 'color: #764ba2; font-size: 14px;');
