@@ -4,59 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Surya Dwi Saputra - Administration Professional Portfolio">
-    <meta name="keywords" content="Administration, Professional, Portfolio, Surya">
-    <meta name="author" content="Surya Dwi Saputra">
+    <meta name="keywords" content="Administration, Professional, Portfolio">
     <title>Surya Dwi Saputra - Administration Professional</title>
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">S.</div>
-            <div class="preloader-text">Loading Portfolio</div>
+    <!-- Opening Animation -->
+    <div class="opening-animation" id="openingAnimation">
+        <div class="opening-container">
+            <div class="opening-background">
+                <div class="opening-blur"></div>
+                <div class="opening-particles"></div>
+            </div>
+            
+            <div class="opening-content">
+                <h1 class="opening-title" id="openingTitle">Surya Dwi Saputra</h1>
+                <div class="opening-subtitle" id="openingSubtitle">
+                    <span class="subtitle-line">Administration Specialist</span>
+                    <span class="subtitle-line">Customer Service Expert</span>
+                    <span class="subtitle-line">Office Admin Student</span>
+                </div>
+                <div class="opening-line"></div>
+            </div>
         </div>
     </div>
 
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Animated Background -->
-    <div class="bg-blur">
-        <div class="blur-element blur-1"></div>
-        <div class="blur-element blur-2"></div>
-        <div class="blur-element blur-3"></div>
+    <!-- Background Elements -->
+    <div class="floating-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">S.</a>
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">S</span>
+            </a>
             
             <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link">Home</a>
+                <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#certificates" class="nav-link">Certificates</a>
-                <a href="cv.pdf" class="nav-link" download>CV</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
+
+            <a href="cv.pdf" class="btn-cv-download" download title="Download CV">
+                <i class="fas fa-download"></i>
+                <span>Download CV</span>
+            </a>
 
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -68,50 +77,45 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container">
+        <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="title-word">Hi, I'm</span>
-                        <span class="title-word">Surya Dwi</span>
-                        <span class="title-word highlight">Saputra</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        An Administration specialist and problem solver passionate about creating efficient, elegant systems. I transform complex organizational challenges into streamlined solutions with precision and creativity.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="https://wa.me/6285730819709" class="btn btn-whatsapp" target="_blank" rel="noopener">
-                            <i class="fab fa-whatsapp"></i>
-                            WhatsApp
-                        </a>
-                        <a href="cv.pdf" class="btn btn-cv" download>
-                            <i class="fas fa-download"></i>
-                            Lihat CV
-                        </a>
-                    </div>
-                </div>
-
-                <div class="hero-visual">
-                    <div class="profile-box" id="profileBox">
-                        <img src="profile.png" alt="Surya Dwi Saputra" class="profile-image" loading="lazy">
-                        <div class="profile-glow"></div>
-                    </div>
-                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Hi, I'm</span>
+                    <span class="title-line">Surya Dwi</span>
+                    <span class="title-line highlight">Saputra</span>
+                </h1>
+                <p class="hero-subtitle">
+                    An Administration specialist and problem solver passionate about creating efficient, elegant systems. I transform complex organizational challenges into streamlined solutions with precision and creativity.
+                </p>
+                <a href="#about" class="btn-learn-more">
+                    <span>Learn More</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
             </div>
 
-            <div class="scroll-hint">
-                <i class="fas fa-chevron-down"></i>
-                <span>Scroll to explore</span>
+            <div class="hero-visual">
+                <div class="profile-card">
+                    <img src="profile.png" alt="Surya Dwi Saputra" loading="lazy">
+                    <div class="profile-glow"></div>
+                </div>
             </div>
+        </div>
+
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
     </section>
 
     <!-- About Section -->
     <section class="about" id="about">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">About Me</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="about-content">
@@ -124,7 +128,7 @@
                 <div class="about-stats">
                     <div class="stat-card">
                         <span class="stat-number">Top 10</span>
-                        <span class="stat-label">Student<br>Ranking</span>
+                        <span class="stat-label">Student<br>Achievement</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number">3+</span>
@@ -141,10 +145,10 @@
 
     <!-- Skills Section -->
     <section class="skills" id="skills">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Skills & Expertise</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="skills-grid">
@@ -153,9 +157,9 @@
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3>Office Management</h3>
-                    <p>Strategic planning and coordination of office operations.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 95%"></div>
+                    <p>Strategic planning and coordination of office operations, resource management, and process optimization.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 95%"></div>
                     </div>
                 </div>
 
@@ -164,9 +168,9 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Leadership</h3>
-                    <p>Building high-performing teams and fostering collaboration.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 92%"></div>
+                    <p>Building high-performing teams, fostering collaboration, and delivering results through effective leadership.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 92%"></div>
                     </div>
                 </div>
 
@@ -175,9 +179,9 @@
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Data Analysis</h3>
-                    <p>Converting business data into actionable insights.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 88%"></div>
+                    <p>Converting business data into actionable insights, creating reports, and supporting decision-making.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 88%"></div>
                     </div>
                 </div>
 
@@ -186,9 +190,9 @@
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3>Communication</h3>
-                    <p>Clear written and verbal communication skills.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 96%"></div>
+                    <p>Clear and compelling written and verbal communication, presentation skills, and professional correspondence.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 96%"></div>
                     </div>
                 </div>
 
@@ -197,9 +201,9 @@
                         <i class="fas fa-laptop"></i>
                     </div>
                     <h3>Digital Tools</h3>
-                    <p>Proficient in Microsoft Office and business software.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 90%"></div>
+                    <p>Proficient in Microsoft Office Suite, data management systems, and modern business software solutions.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 90%"></div>
                     </div>
                 </div>
 
@@ -208,9 +212,9 @@
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3>Problem Solving</h3>
-                    <p>Creative approach to identifying and solving challenges.</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" style="--percentage: 91%"></div>
+                    <p>Creative and analytical approach to identifying challenges and implementing innovative, sustainable solutions.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="--progress: 91%"></div>
                     </div>
                 </div>
             </div>
@@ -219,10 +223,10 @@
 
     <!-- Experience Section -->
     <section class="experience" id="experience">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Experience</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="timeline">
@@ -232,7 +236,7 @@
                         <h3>PT Loket Premium Game Indonesia</h3>
                         <p class="timeline-role">Customer Service & Administrative Specialist</p>
                         <p class="timeline-period">6 Months</p>
-                        <p>Managed customer relationships and administrative operations. Coordinated with internal teams, processed transactions, and maintained detailed company records.</p>
+                        <p>Managed customer relationships and administrative operations. Coordinated with internal teams, processed transactions, and maintained detailed company records while ensuring high-quality customer satisfaction.</p>
                     </div>
                 </div>
 
@@ -242,7 +246,7 @@
                         <h3>Field Work Internship (PKL)</h3>
                         <p class="timeline-role">Administrative & Operations Support</p>
                         <p class="timeline-period">6 Months</p>
-                        <p>Gained practical experience in real-world business operations. Handled customer interactions, managed data systems, and coordinated daily operations.</p>
+                        <p>Gained practical experience in real-world business operations. Handled customer interactions, managed data systems, coordinated daily operations, and supported management with administrative tasks.</p>
                     </div>
                 </div>
 
@@ -252,7 +256,7 @@
                         <h3>Universitas Negeri Surabaya</h3>
                         <p class="timeline-role">Office Administration Education Student</p>
                         <p class="timeline-period">Ongoing</p>
-                        <p>Pursuing comprehensive education in office administration with focus on business processes and organizational excellence.</p>
+                        <p>Pursuing comprehensive education in office administration, developing expertise in business processes, organizational management, and administrative excellence through rigorous coursework and practical applications.</p>
                     </div>
                 </div>
             </div>
@@ -261,10 +265,10 @@
 
     <!-- Projects Section -->
     <section class="projects" id="projects">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Projects & Work</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="projects-grid">
@@ -315,15 +319,15 @@
 
     <!-- Certificates Section -->
     <section class="certificates" id="certificates">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Certificates & Achievements</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="certificates-grid">
                 <div class="cert-card">
-                    <div class="cert-header">
+                    <div class="cert-icon">
                         <i class="fas fa-award"></i>
                     </div>
                     <h3>Top 10 Student Achievement</h3>
@@ -332,7 +336,7 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-header">
+                    <div class="cert-icon">
                         <i class="fas fa-medal"></i>
                     </div>
                     <h3>Student Council Leadership</h3>
@@ -341,7 +345,7 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-header">
+                    <div class="cert-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3>Professional Experience</h3>
@@ -350,7 +354,7 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-header">
+                    <div class="cert-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Field Work Internship</h3>
@@ -363,10 +367,10 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Get In Touch</h2>
-                <div class="title-underline"></div>
+                <div class="title-accent"></div>
             </div>
 
             <div class="contact-wrapper">
@@ -415,12 +419,11 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
+        <div class="section-container">
             <p>&copy; 2026 Surya Dwi Saputra. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="script.js" defer></script>
 </body>
 </html>
