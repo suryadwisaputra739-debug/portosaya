@@ -68,9 +68,32 @@
             </a>
 
             <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#experience" class="mobile-nav-link">Experience</a>
+                <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#certificates" class="mobile-nav-link">Certificates</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+                
+                <div class="mobile-menu-divider"></div>
+                
+                <a href="cv.pdf" class="mobile-btn-cv-download" download>
+                    <i class="fas fa-download"></i>
+                    <span>Download CV</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -127,16 +150,19 @@
 
                 <div class="about-stats">
                     <div class="stat-card">
-                        <span class="stat-number">Top 10</span>
-                        <span class="stat-label">Student<br>Achievement</span>
+                        <span class="stat-number" data-target="3">0</span>
+                        <span class="stat-plus">+</span>
+                        <span class="stat-label">Years of<br>Leadership</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label">Years<br>Leadership</span>
+                        <span class="stat-number" data-target="1">0</span>
+                        <span class="stat-plus">+</span>
+                        <span class="stat-label">Years of<br>Professional Experience</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">12+</span>
-                        <span class="stat-label">Months<br>Experience</span>
+                        <span class="stat-number" data-target="100">0</span>
+                        <span class="stat-percent">%</span>
+                        <span class="stat-label">Commitment</span>
                     </div>
                 </div>
             </div>

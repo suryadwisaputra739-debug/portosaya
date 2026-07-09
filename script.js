@@ -1,5 +1,5 @@
 // ============================================
-// PREMIUM PORTFOLIO - CINEMATIC INTERACTIONS
+// PREMIUM PORTFOLIO - MOBILE OPTIMIZED
 // ============================================
 
 // DOM Elements
@@ -8,17 +8,17 @@ const navbar = document.getElementById('navbar');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const scrollProgress = document.getElementById('scrollProgress');
 const backToTop = document.getElementById('backToTop');
-const openingTitle = document.getElementById('openingTitle');
-const openingSubtitle = document.getElementById('openingSubtitle');
 
 // ============================================
 // OPENING ANIMATION TIMING
 // ============================================
 
 window.addEventListener('load', () => {
-    // Fade out opening after 2.5 seconds
     setTimeout(() => {
         if (openingAnimation) {
             openingAnimation.style.opacity = '0';
@@ -29,6 +29,59 @@ window.addEventListener('load', () => {
         }
     }, 2500);
 });
+
+// ============================================
+// HAMBURGER MENU TOGGLE (MOBILE)
+// ============================================
+
+function toggleMobileMenu() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    mobileMenuOverlay.classList.toggle('active');
+    
+    if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu();
+});
+
+// Close menu when overlay clicked
+mobileMenuOverlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    mobileMenuOverlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// ============================================
+// MOBILE MENU LINKS
+// ============================================
+
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+});
+
+// Download CV button in mobile menu
+const mobileDownloadBtn = document.querySelector('.mobile-btn-cv-download');
+if (mobileDownloadBtn) {
+    mobileDownloadBtn.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+}
 
 // ============================================
 // SCROLL PROGRESS BAR
@@ -80,57 +133,36 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================
-// MOBILE HAMBURGER MENU
+// SMOOTH SCROLL FOR ALL LINKS
 // ============================================
 
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+function smoothScrollToSection(sectionId) {
+    const section = document.querySelector(sectionId);
+    if (section) {
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
-    });
+    }
 }
 
-// ============================================
-// SMOOTH SCROLL FOR LINKS
-// ============================================
-
+// Desktop navigation links
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
-        
         if (href.startsWith('#')) {
             e.preventDefault();
-            const targetSection = document.querySelector(href);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            smoothScrollToSection(href);
         }
     });
 });
 
-// Learn More button scroll
+// Learn More button
 const learnMoreBtn = document.querySelector('.btn-learn-more');
 if (learnMoreBtn) {
     learnMoreBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const aboutSection = document.querySelector('#about');
-        if (aboutSection) {
-            aboutSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        smoothScrollToSection('#about');
     });
 }
 
@@ -174,11 +206,51 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements
 document.querySelectorAll('.section-header, .about-text, .stat-card, .skill-card, .timeline-item, .project-card, .cert-card, .contact-card').forEach(el => {
     el.style.opacity = '0';
     revealObserver.observe(el);
 });
+
+// ============================================
+// COUNT UP ANIMATION FOR STATS
+// ============================================
+
+let statsAnimated = false;
+
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 60; // 60 frames animation
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 30);
+}
+
+const statsSection = document.querySelector('.about-stats');
+if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsAnimated) {
+                statsAnimated = true;
+                
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(el => {
+                    const target = parseInt(el.getAttribute('data-target'));
+                    animateCounter(el, target);
+                });
+                
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    statsObserver.observe(statsSection);
+}
 
 // ============================================
 // LAZY LOADING IMAGES
@@ -201,6 +273,21 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
 });
 
 // ============================================
+// PERFORMANCE OPTIMIZATION - DEBOUNCED SCROLL
+// ============================================
+
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+
+// ============================================
 // PARTICLE ANIMATION
 // ============================================
 
@@ -208,7 +295,10 @@ function createParticles() {
     const particleContainer = document.querySelector('.hero-particles');
     if (!particleContainer) return;
 
-    for (let i = 0; i < 20; i++) {
+    // Clear existing particles
+    particleContainer.innerHTML = '';
+    
+    for (let i = 0; i < 5; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';
@@ -220,59 +310,10 @@ function createParticles() {
 createParticles();
 
 // ============================================
-// SMOOTH PAGE TRANSITIONS
-// ============================================
-
-// Add smooth transition on page load
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-});
-
-// ============================================
-// CURSOR EFFECTS
-// ============================================
-
-document.addEventListener('mousemove', (e) => {
-    // Add subtle cursor glow effect for interactive elements
-    const interactive = document.elementFromPoint(e.clientX, e.clientY);
-    
-    if (interactive && (interactive.classList.contains('btn-learn-more') || 
-        interactive.classList.contains('btn-cv-download') || 
-        interactive.classList.contains('social-btn'))) {
-        interactive.style.cursor = 'pointer';
-    }
-});
-
-// ============================================
-// SKILL CARD ANIMATIONS
-// ============================================
-
-const skillCards = document.querySelectorAll('.skill-card');
-skillCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.animation = 'none';
-        setTimeout(() => {
-            this.style.animation = '';
-        }, 10);
-    });
-});
-
-// ============================================
-// FLOATING ANIMATION FOR ELEMENTS
-// ============================================
-
-function addFloatingAnimation() {
-    const floatingElements = document.querySelectorAll('.skill-card, .cert-card');
-    floatingElements.forEach((el, index) => {
-        el.style.animation = `float 4s ease-in-out ${index * 0.2}s infinite`;
-    });
-}
-
-// ============================================
 // RIPPLE EFFECT ON CLICK
 // ============================================
 
-document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn').forEach(button => {
+document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn, .mobile-btn-cv-download').forEach(button => {
     button.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
@@ -294,51 +335,7 @@ document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn').forE
 });
 
 // ============================================
-// FORM VALIDATION (if form exists)
-// ============================================
-
-const form = document.querySelector('form');
-if (form) {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Add loading state
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                submitBtn.textContent = 'Message Sent!';
-                form.reset();
-                
-                setTimeout(() => {
-                    submitBtn.textContent = 'Send Message';
-                    submitBtn.disabled = false;
-                }, 2000);
-            }, 1500);
-        }
-    });
-}
-
-// ============================================
-// INTERSECTION OBSERVER FOR ANIMATIONS
-// ============================================
-
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-    const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                navbar.classList.add('scroll');
-            }
-        });
-    });
-    heroObserver.observe(heroSection);
-}
-
-// ============================================
-// PREVENT SCROLL ON OPENING ANIMATION
+// PREVENT SCROLL DURING OPENING ANIMATION
 // ============================================
 
 let openingComplete = false;
@@ -351,27 +348,42 @@ setTimeout(() => {
 document.body.style.overflow = 'hidden';
 
 // ============================================
-// PERFORMANCE OPTIMIZATION
+// RESPONSIVE BREAKPOINT DETECTION
 // ============================================
 
-// Debounce scroll events
-let ticking = false;
-let lastScrollY = 0;
+function isMobile() {
+    return window.innerWidth <= 768;
+}
 
-window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY;
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            ticking = false;
-        });
-        ticking = true;
+window.addEventListener('resize', () => {
+    // Close mobile menu on resize to desktop
+    if (!isMobile() && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
-}, { passive: true });
+});
+
+// ============================================
+// MICRO INTERACTIONS
+// ============================================
+
+// Card hover effects with shadow
+document.querySelectorAll('.skill-card, .cert-card, .project-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.boxShadow = '0 30px 80px rgba(102, 126, 234, 0.4)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.boxShadow = '0 20px 60px rgba(102, 126, 234, 0.3)';
+    });
+});
 
 // ============================================
 // CONSOLE MESSAGE
 // ============================================
 
 console.log('%c🌟 Welcome to Surya\'s Premium Portfolio', 'color: #667eea; font-size: 20px; font-weight: bold;');
-console.log('%c✨ Premium Design | Cinematic Animations | Professional Experience', 'color: #764ba2; font-size: 14px;');
+console.log('%c✨ Mobile-Optimized | Cinematic Animations | Professional Quality', 'color: #764ba2; font-size: 14px;');
 console.log('%c📧 Contact: suryadwisaputra739@gmail.com | 📱 WhatsApp: +62 857 3081 9709', 'color: #a0aec0; font-size: 12px;');

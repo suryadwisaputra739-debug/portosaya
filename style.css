@@ -330,6 +330,8 @@ body {
     font-weight: 700;
     text-decoration: none;
     transition: transform 0.3s ease;
+    z-index: 110;
+    position: relative;
 }
 
 .logo-icon {
@@ -396,6 +398,7 @@ body {
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
     position: relative;
     overflow: hidden;
+    z-index: 110;
 }
 
 .btn-cv-download::before {
@@ -418,31 +421,198 @@ body {
     transform: scaleX(1);
 }
 
+/* ============================================
+   HAMBURGER MENU
+   ============================================ */
+
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 120;
+    position: relative;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
 }
 
-.hamburger span {
+.hamburger-line {
     width: 25px;
     height: 3px;
     background: var(--text);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    display: block;
 }
 
-.hamburger.active span:nth-child(1) {
+.hamburger.active .hamburger-line:nth-child(1) {
     transform: rotate(-45deg) translate(-8px, 8px);
 }
 
-.hamburger.active span:nth-child(2) {
+.hamburger.active .hamburger-line:nth-child(2) {
     opacity: 0;
 }
 
-.hamburger.active span:nth-child(3) {
+.hamburger.active .hamburger-line:nth-child(3) {
     transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 105;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 23, 41, 0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 110;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-menu.active {
+    transform: translateY(0);
+}
+
+.mobile-menu-content {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.mobile-nav-link {
+    text-decoration: none;
+    color: var(--text-light);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: block;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: none;
+}
+
+.mobile-menu.active .mobile-nav-link {
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.mobile-nav-link:nth-child(1) { animation-delay: 0.1s; }
+.mobile-nav-link:nth-child(2) { animation-delay: 0.2s; }
+.mobile-nav-link:nth-child(3) { animation-delay: 0.3s; }
+.mobile-nav-link:nth-child(4) { animation-delay: 0.4s; }
+.mobile-nav-link:nth-child(5) { animation-delay: 0.5s; }
+.mobile-nav-link:nth-child(6) { animation-delay: 0.6s; }
+.mobile-nav-link:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.mobile-nav-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--secondary);
+    padding-left: 2rem;
+}
+
+.mobile-menu-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1rem 0;
+    opacity: 0;
+    animation: fadeIn 0.4s ease 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.mobile-btn-cv-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    width: 100%;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: none;
+}
+
+.mobile-menu.active .mobile-btn-cv-download {
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-btn-cv-download:active {
+    transform: scale(0.95);
 }
 
 /* ============================================
@@ -729,12 +899,24 @@ section {
 .stat-card {
     background: rgba(102, 126, 234, 0.1);
     border: 1px solid var(--border);
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     border-radius: 15px;
     text-align: center;
     backdrop-filter: blur(20px);
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     animation: fadeInUp 0.8s ease-out backwards;
+    position: relative;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
 .stat-card:nth-child(1) { animation-delay: 0.3s; }
@@ -744,23 +926,45 @@ section {
 .stat-card:hover {
     background: rgba(102, 126, 234, 0.15);
     border-color: var(--secondary);
-    transform: translateY(-10px);
+    transform: translateY(-8px) scale(1.03);
     box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+}
+
+.stat-card:hover::before {
+    opacity: 1;
 }
 
 .stat-number {
     display: block;
-    font-size: 2.5em;
+    font-size: 3.5em;
     font-weight: 700;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: -0.3rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -2px;
+}
+
+.stat-plus {
     color: var(--secondary);
-    margin-bottom: 0.5rem;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.stat-percent {
+    color: var(--secondary);
+    font-size: 1.5em;
+    font-weight: 700;
 }
 
 .stat-label {
     display: block;
     color: var(--text-light);
-    font-size: 0.95em;
-    line-height: 1.6;
+    font-size: 0.85em;
+    line-height: 1.4;
+    margin-top: 0.5rem;
 }
 
 /* ============================================
@@ -1270,7 +1474,30 @@ section {
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE - TABLET (768px - 1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .hero-container {
+        gap: 2rem;
+    }
+
+    .profile-card {
+        width: 280px;
+        height: 330px;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (max-width: 768px)
    ============================================ */
 
 @media (max-width: 768px) {
@@ -1278,8 +1505,20 @@ section {
         display: none;
     }
 
+    .btn-cv-download {
+        display: none;
+    }
+
     .hamburger {
         display: flex;
+    }
+
+    .mobile-menu-overlay {
+        display: block;
+    }
+
+    .mobile-menu {
+        display: block;
     }
 
     .hero-container {
@@ -1301,7 +1540,20 @@ section {
     }
 
     .about-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .stat-number {
+        font-size: 2.8em;
+    }
+
+    .stat-label {
+        font-size: 0.8em;
     }
 
     .contact-wrapper {
@@ -1318,22 +1570,21 @@ section {
     }
 
     section {
-        padding: 80px 0;
+        padding: 60px 0;
+    }
+
+    .hero {
+        padding: 100px 0 2rem;
     }
 }
+
+/* ============================================
+   RESPONSIVE - SMALL MOBILE (max-width: 480px)
+   ============================================ */
 
 @media (max-width: 480px) {
     .nav-container {
         padding: 0 1rem;
-    }
-
-    .btn-cv-download {
-        padding: 8px 16px;
-        font-size: 0.85em;
-    }
-
-    .btn-cv-download span {
-        display: none;
     }
 
     .section-container {
@@ -1343,10 +1594,50 @@ section {
     .hero-particles {
         display: none;
     }
+
+    .hero-container {
+        padding: 0 1rem;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2.2em;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-links {
+        gap: 1rem;
+    }
+
+    .social-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1em;
+    }
+
+    .mobile-nav-link {
+        padding: 0.8rem 1.2rem;
+    }
+
+    .mobile-btn-cv-download {
+        font-size: 0.9em;
+        padding: 12px 16px;
+    }
 }
 
 /* ============================================
-   ADDITIONAL ANIMATIONS
+   ANIMATIONS & UTILITIES
    ============================================ */
 
 @keyframes float {
@@ -1371,101 +1662,14 @@ section {
 }
 
 /* ============================================
-   MOBILE MENU RESPONSIVE
-   ============================================ */
-
-@media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: rgba(15, 23, 41, 0.95);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        gap: 0;
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-        padding: 2rem 0;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-link {
-        display: block;
-        padding: 1rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-link::after {
-        display: none;
-    }
-
-    .btn-cv-download {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-    }
-}
-
-/* ============================================
-   LOADING STATES
-   ============================================ */
-
-.loading {
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-/* ============================================
-   TRANSITIONS
-   ============================================ */
-
-* {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-a, button {
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ============================================
-   FOCUS STATES (Accessibility)
+   ACCESSIBILITY
    ============================================ */
 
 button:focus,
 a:focus,
-input:focus,
-textarea:focus {
+input:focus {
     outline: 2px solid var(--secondary);
     outline-offset: 2px;
-}
-
-/* ============================================
-   PRINT STYLES
-   ============================================ */
-
-@media print {
-    .navbar,
-    .scroll-progress,
-    .back-to-top,
-    .hamburger {
-        display: none;
-    }
-}
-
-/* ============================================
-   DARK MODE SUPPORT (future)
-   ============================================ */
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary: #0f1729;
-        --text: #ffffff;
-        --text-light: #a0aec0;
-    }
 }
 
 /* ============================================
