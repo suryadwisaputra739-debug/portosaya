@@ -26,15 +26,15 @@ let portfolioRevealed = false;
 function createIntroParticles() {
     if (!introParticles) return;
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 12; i++) {
         const particle = document.createElement('div');
         particle.className = 'intro-particle';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
-        particle.style.width = (Math.random() * 3 + 2) + 'px';
+        particle.style.width = (Math.random() * 2.5 + 1.5) + 'px';
         particle.style.height = particle.style.width;
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.animationDuration = (Math.random() * 12 + 20) + 's';
         introParticles.appendChild(particle);
     }
 }
@@ -61,22 +61,41 @@ document.addEventListener('keydown', (e) => {
 
 function handleIntroButtonClick() {
     if (portfolioRevealed) return;
-    
+
     portfolioRevealed = true;
-    
-    // Add pressed state
+
+    // 1. Keycap sinks down (handled by .pressed CSS transform)
     introButton.classList.add('pressed');
-    
-    // Ripple effect
-    createRippleEffect(introButton);
-    
-    // Blur intro background briefly
+
+    // 2. Ripple emerges from the switch center
+    createKeyRipple(introButton);
+
+    // Slight backdrop blur begins immediately
     introScreen.style.backdropFilter = 'blur(10px)';
-    
-    // Wait for mechanical press animation, then reveal
+
+    // 3. After the press settles, release + bounce the keycap back up
+    setTimeout(() => {
+        introButton.classList.remove('pressed');
+        introButton.classList.add('bounce');
+    }, 140);
+
+    // 4. Once the bounce plays out, begin the cinematic reveal
     setTimeout(() => {
         revealPortfolio();
-    }, 300);
+    }, 420);
+}
+
+// ============================================
+// KEY RIPPLE (mechanical, radiates from switch)
+// ============================================
+
+function createKeyRipple(assembly) {
+    const cap = assembly.querySelector('.keycap-face');
+    if (!cap) return;
+    const ripple = document.createElement('span');
+    ripple.className = 'key-ripple';
+    cap.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
 }
 
 // ============================================
@@ -156,27 +175,32 @@ function triggerScrollRevealAnimations() {
 
 document.addEventListener('mousemove', (e) => {
     if (window.innerWidth > 768 && introScreen.offsetParent !== null) {
-        const button = introButton.querySelector('.button-cap');
-        const rect = button.getBoundingClientRect();
+        const cap = introButton.querySelector('.key-cap');
+        const reflection = introButton.querySelector('.keycap-reflection');
+        if (!cap) return;
+        const rect = introButton.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        
-        // Subtle 3D tilt effect
-        const xRotation = (y / rect.height) * 5;
-        const yRotation = (x / rect.width) * -5;
-        
-        // Only apply if intro screen is visible
-        if (introScreen.classList.contains('hidden') === false) {
-            button.style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+
+        // Subtle 3D tilt following cursor, layered on top of the press transform
+        const xRotation = (y / rect.height) * 10;
+        const yRotation = (x / rect.width) * -10;
+
+        if (introScreen.classList.contains('hidden') === false && !introButton.classList.contains('pressed')) {
+            cap.style.transform = `translateZ(38px) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+            if (reflection) {
+                reflection.style.transform = `rotate(${-18 + yRotation}deg) translate(${xRotation}px, ${yRotation}px)`;
+            }
         }
     }
 });
 
 // Reset tilt on mouse leave
 introButton.addEventListener('mouseleave', () => {
-    if (introButton.querySelector('.button-cap')) {
-        introButton.querySelector('.button-cap').style.transform = '';
-    }
+    const cap = introButton.querySelector('.key-cap');
+    const reflection = introButton.querySelector('.keycap-reflection');
+    if (cap) cap.style.transform = '';
+    if (reflection) reflection.style.transform = '';
 });
 
 // ============================================

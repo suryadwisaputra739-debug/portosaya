@@ -26,14 +26,31 @@
 
         <div class="intro-content">
             <div class="intro-button-container">
-                <div class="intro-button" id="introButton">
-                    <div class="button-3d-wrapper">
-                        <div class="button-cap">
+                <!-- Mechanical Keycap: Base -> Switch -> Keycap -->
+                <div class="key-assembly" id="introButton" tabindex="0" role="button" aria-label="Enter portfolio">
+                    <!-- Base plate (keyboard frame) -->
+                    <div class="key-base">
+                        <div class="key-base-top"></div>
+                    </div>
+                    <!-- Switch stem (visible when key is pressed) -->
+                    <div class="key-switch">
+                        <div class="switch-stem"></div>
+                        <div class="switch-glow"></div>
+                    </div>
+                    <!-- Keycap (the visible pressable cap) -->
+                    <div class="key-cap">
+                        <div class="keycap-face">
                             <span class="button-text">ENTER</span>
                             <i class="fas fa-arrow-right button-icon"></i>
                         </div>
-                        <div class="button-shadow"></div>
+                        <div class="keycap-side keycap-side-front"></div>
+                        <div class="keycap-side keycap-side-right"></div>
+                        <div class="keycap-reflection"></div>
                     </div>
+                    <!-- Contact shadow on base -->
+                    <div class="key-contact-shadow"></div>
+                    <!-- Ambient glow -->
+                    <div class="key-ambient-glow"></div>
                 </div>
             </div>
 
