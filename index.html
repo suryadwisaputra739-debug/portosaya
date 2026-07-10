@@ -15,440 +15,453 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Opening Animation -->
-    <div class="opening-animation" id="openingAnimation">
-        <div class="opening-container">
-            <div class="opening-background">
-                <div class="opening-blur"></div>
-                <div class="opening-particles"></div>
-            </div>
-            
-            <div class="opening-content">
-                <h1 class="opening-title" id="openingTitle">Surya Dwi Saputra</h1>
-                <div class="opening-subtitle" id="openingSubtitle">
-                    <span class="subtitle-line">Administration Specialist</span>
-                    <span class="subtitle-line">Customer Service Expert</span>
-                    <span class="subtitle-line">Office Admin Student</span>
+    <!-- Interactive Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-background">
+            <div class="intro-blur blur-1"></div>
+            <div class="intro-blur blur-2"></div>
+            <div class="intro-blur blur-3"></div>
+            <div class="intro-particles" id="introParticles"></div>
+        </div>
+
+        <div class="intro-content">
+            <div class="intro-button-container">
+                <div class="intro-button" id="introButton">
+                    <div class="button-3d-wrapper">
+                        <div class="button-cap">
+                            <span class="button-text">ENTER</span>
+                            <i class="fas fa-arrow-right button-icon"></i>
+                        </div>
+                        <div class="button-shadow"></div>
+                    </div>
                 </div>
-                <div class="opening-line"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Background Elements -->
-    <div class="floating-bg">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <span class="logo-icon">S</span>
-            </a>
-            
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#certificates" class="nav-link">Certificates</a>
-                <a href="#contact" class="nav-link">Contact</a>
             </div>
 
-            <a href="cv.pdf" class="btn-cv-download" download title="Download CV">
-                <i class="fas fa-download"></i>
-                <span>Download CV</span>
-            </a>
-
-            <div class="hamburger" id="hamburger">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
+            <div class="intro-hint">
+                <span class="hint-text">Press Enter to Explore</span>
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-        
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-content">
-                <a href="#home" class="mobile-nav-link">Home</a>
-                <a href="#about" class="mobile-nav-link">About</a>
-                <a href="#skills" class="mobile-nav-link">Skills</a>
-                <a href="#experience" class="mobile-nav-link">Experience</a>
-                <a href="#projects" class="mobile-nav-link">Projects</a>
-                <a href="#certificates" class="mobile-nav-link">Certificates</a>
-                <a href="#contact" class="mobile-nav-link">Contact</a>
+        <div class="intro-overlay"></div>
+    </div>
+
+    <!-- Main Portfolio -->
+    <div class="portfolio-wrapper" id="portfolioWrapper">
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress" id="scrollProgress"></div>
+
+        <!-- Background Elements -->
+        <div class="floating-bg">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">
+                    <span class="logo-icon">S</span>
+                </a>
                 
-                <div class="mobile-menu-divider"></div>
-                
-                <a href="cv.pdf" class="mobile-btn-cv-download" download>
+                <div class="nav-menu" id="navMenu">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#certificates" class="nav-link">Certificates</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+
+                <a href="cv.pdf" class="btn-cv-download" download title="Download CV">
                     <i class="fas fa-download"></i>
                     <span>Download CV</span>
                 </a>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line">Hi, I'm</span>
-                    <span class="title-line">Surya Dwi</span>
-                    <span class="title-line highlight">Saputra</span>
-                </h1>
-                <p class="hero-subtitle">
-                    An Administration specialist and problem solver passionate about creating efficient, elegant systems. I transform complex organizational challenges into streamlined solutions with precision and creativity.
-                </p>
-                <a href="#about" class="btn-learn-more">
-                    <span>Learn More</span>
-                    <i class="fas fa-arrow-down"></i>
-                </a>
-            </div>
-
-            <div class="hero-visual">
-                <div class="profile-card">
-                    <img src="profile.png" alt="Surya Dwi Saputra" loading="lazy">
-                    <div class="profile-glow"></div>
+                <div class="hamburger" id="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                 </div>
             </div>
-        </div>
 
-        <div class="hero-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <div class="title-accent"></div>
-            </div>
-
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm an Office Administration Education student at Universitas Negeri Surabaya, dedicated to mastering the art of organizational excellence. With a keen eye for detail and a creative approach to problem-solving, I transform administrative processes into streamlined, efficient systems.</p>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            
+            <!-- Mobile Menu -->
+            <div class="mobile-menu" id="mobileMenu">
+                <div class="mobile-menu-content">
+                    <a href="#home" class="mobile-nav-link">Home</a>
+                    <a href="#about" class="mobile-nav-link">About</a>
+                    <a href="#skills" class="mobile-nav-link">Skills</a>
+                    <a href="#experience" class="mobile-nav-link">Experience</a>
+                    <a href="#projects" class="mobile-nav-link">Projects</a>
+                    <a href="#certificates" class="mobile-nav-link">Certificates</a>
+                    <a href="#contact" class="mobile-nav-link">Contact</a>
                     
-                    <p>My journey spans from customer service excellence to strategic administrative support, with hands-on experience in real-world business operations. I believe that great administration is the backbone of successful organizations.</p>
+                    <div class="mobile-menu-divider"></div>
+                    
+                    <a href="cv.pdf" class="mobile-btn-cv-download" download>
+                        <i class="fas fa-download"></i>
+                        <span>Download CV</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-line">Hi, I'm</span>
+                        <span class="title-line">Surya Dwi</span>
+                        <span class="title-line highlight">Saputra</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        An Administration specialist and problem solver passionate about creating efficient, elegant systems. I transform complex organizational challenges into streamlined solutions with precision and creativity.
+                    </p>
+                    <a href="#about" class="btn-learn-more">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
                 </div>
 
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <span class="stat-number" data-target="3">0</span>
-                        <span class="stat-plus">+</span>
-                        <span class="stat-label">Years of<br>Leadership</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number" data-target="1">0</span>
-                        <span class="stat-plus">+</span>
-                        <span class="stat-label">Years of<br>Professional Experience</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number" data-target="100">0</span>
-                        <span class="stat-percent">%</span>
-                        <span class="stat-label">Commitment</span>
+                <div class="hero-visual">
+                    <div class="profile-card">
+                        <img src="profile.png" alt="Surya Dwi Saputra" loading="lazy">
+                        <div class="profile-glow"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="title-accent"></div>
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
             </div>
+        </section>
 
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Office Management</h3>
-                    <p>Strategic planning and coordination of office operations, resource management, and process optimization.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 95%"></div>
-                    </div>
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="title-accent"></div>
                 </div>
 
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-users"></i>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I'm an Office Administration Education student at Universitas Negeri Surabaya, dedicated to mastering the art of organizational excellence. With a keen eye for detail and a creative approach to problem-solving, I transform administrative processes into streamlined, efficient systems.</p>
+                        
+                        <p>My journey spans from customer service excellence to strategic administrative support, with hands-on experience in real-world business operations. I believe that great administration is the backbone of successful organizations.</p>
                     </div>
-                    <h3>Leadership</h3>
-                    <p>Building high-performing teams, fostering collaboration, and delivering results through effective leadership.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 92%"></div>
-                    </div>
-                </div>
 
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Data Analysis</h3>
-                    <p>Converting business data into actionable insights, creating reports, and supporting decision-making.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 88%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Communication</h3>
-                    <p>Clear and compelling written and verbal communication, presentation skills, and professional correspondence.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 96%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <h3>Digital Tools</h3>
-                    <p>Proficient in Microsoft Office Suite, data management systems, and modern business software solutions.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 90%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>Problem Solving</h3>
-                    <p>Creative and analytical approach to identifying challenges and implementing innovative, sustainable solutions.</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--progress: 91%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Experience</h2>
-                <div class="title-accent"></div>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>PT Loket Premium Game Indonesia</h3>
-                        <p class="timeline-role">Customer Service & Administrative Specialist</p>
-                        <p class="timeline-period">6 Months</p>
-                        <p>Managed customer relationships and administrative operations. Coordinated with internal teams, processed transactions, and maintained detailed company records while ensuring high-quality customer satisfaction.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Field Work Internship (PKL)</h3>
-                        <p class="timeline-role">Administrative & Operations Support</p>
-                        <p class="timeline-period">6 Months</p>
-                        <p>Gained practical experience in real-world business operations. Handled customer interactions, managed data systems, coordinated daily operations, and supported management with administrative tasks.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Universitas Negeri Surabaya</h3>
-                        <p class="timeline-role">Office Administration Education Student</p>
-                        <p class="timeline-period">Ongoing</p>
-                        <p>Pursuing comprehensive education in office administration, developing expertise in business processes, organizational management, and administrative excellence through rigorous coursework and practical applications.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Projects & Work</h2>
-                <div class="title-accent"></div>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <i class="fas fa-folder-open"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Administrative Process Optimization</h3>
-                        <p>Redesigned office workflows to improve efficiency by 40%, implementing modern data management systems.</p>
-                        <div class="project-tags">
-                            <span>Administration</span>
-                            <span>Process</span>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <span class="stat-number" data-target="3">0</span>
+                            <span class="stat-plus">+</span>
+                            <span class="stat-label">Years of<br>Leadership</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Data Management System</h3>
-                        <p>Developed comprehensive data tracking and reporting system for organizational operations.</p>
-                        <div class="project-tags">
-                            <span>Data</span>
-                            <span>System</span>
+                        <div class="stat-card">
+                            <span class="stat-number" data-target="1">0</span>
+                            <span class="stat-plus">+</span>
+                            <span class="stat-label">Years of<br>Professional Experience</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Team Coordination Project</h3>
-                        <p>Led cross-functional team initiatives and coordinated successful organizational restructuring efforts.</p>
-                        <div class="project-tags">
-                            <span>Team</span>
-                            <span>Leadership</span>
+                        <div class="stat-card">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-percent">%</span>
+                            <span class="stat-label">Commitment</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Certificates Section -->
-    <section class="certificates" id="certificates">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Certificates & Achievements</h2>
-                <div class="title-accent"></div>
-            </div>
-
-            <div class="certificates-grid">
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>Top 10 Student Achievement</h3>
-                    <p>Universitas Negeri Surabaya</p>
-                    <p class="cert-year">2022 - 2025</p>
+        <!-- Skills Section -->
+        <section class="skills" id="skills">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Skills & Expertise</h2>
+                    <div class="title-accent"></div>
                 </div>
 
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3>Student Council Leadership</h3>
-                    <p>3 Years of OSIS Experience</p>
-                    <p class="cert-year">2022 - 2025</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Professional Experience</h3>
-                    <p>PT Loket Premium Game Indonesia</p>
-                    <p class="cert-year">6 Months</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Field Work Internship</h3>
-                    <p>Practical Business Operations</p>
-                    <p class="cert-year">6 Months</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="title-accent"></div>
-            </div>
-
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <a href="mailto:suryadwisaputra739@gmail.com">suryadwisaputra739@gmail.com</a>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Office Management</h3>
+                        <p>Strategic planning and coordination of office operations, resource management, and process optimization.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 95%"></div>
+                        </div>
                     </div>
 
-                    <div class="contact-card">
-                        <i class="fas fa-phone"></i>
-                        <h3>WhatsApp</h3>
-                        <a href="https://wa.me/6285730819709" target="_blank" rel="noopener">+62 857 3081 9709</a>
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Leadership</h3>
+                        <p>Building high-performing teams, fostering collaboration, and delivering results through effective leadership.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 92%"></div>
+                        </div>
                     </div>
 
-                    <div class="contact-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Location</h3>
-                        <p>Surabaya, East Java, Indonesia</p>
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Data Analysis</h3>
+                        <p>Converting business data into actionable insights, creating reports, and supporting decision-making.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 88%"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="social-links">
-                    <a href="https://www.instagram.com/sryaasptraa" class="social-btn" title="Instagram" target="_blank" rel="noopener">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/surya-dwi-saputra-48396b37a" class="social-btn" title="LinkedIn" target="_blank" rel="noopener">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@sryaasptraa" class="social-btn" title="TikTok" target="_blank" rel="noopener">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://wa.me/6285730819709" class="social-btn" title="WhatsApp" target="_blank" rel="noopener">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Communication</h3>
+                        <p>Clear and compelling written and verbal communication, presentation skills, and professional correspondence.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 96%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Digital Tools</h3>
+                        <p>Proficient in Microsoft Office Suite, data management systems, and modern business software solutions.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Problem Solving</h3>
+                        <p>Creative and analytical approach to identifying challenges and implementing innovative, sustainable solutions.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 91%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <!-- Experience Section -->
+        <section class="experience" id="experience">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="title-accent"></div>
+                </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="section-container">
-            <p>&copy; 2026 Surya Dwi Saputra. All rights reserved.</p>
-        </div>
-    </footer>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>PT Loket Premium Game Indonesia</h3>
+                            <p class="timeline-role">Customer Service & Administrative Specialist</p>
+                            <p class="timeline-period">6 Months</p>
+                            <p>Managed customer relationships and administrative operations. Coordinated with internal teams, processed transactions, and maintained detailed company records while ensuring high-quality customer satisfaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Field Work Internship (PKL)</h3>
+                            <p class="timeline-role">Administrative & Operations Support</p>
+                            <p class="timeline-period">6 Months</p>
+                            <p>Gained practical experience in real-world business operations. Handled customer interactions, managed data systems, coordinated daily operations, and supported management with administrative tasks.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Universitas Negeri Surabaya</h3>
+                            <p class="timeline-role">Office Administration Education Student</p>
+                            <p class="timeline-period">Ongoing</p>
+                            <p>Pursuing comprehensive education in office administration, developing expertise in business processes, organizational management, and administrative excellence through rigorous coursework and practical applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Projects & Work</h2>
+                    <div class="title-accent"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Administrative Process Optimization</h3>
+                            <p>Redesigned office workflows to improve efficiency by 40%, implementing modern data management systems.</p>
+                            <div class="project-tags">
+                                <span>Administration</span>
+                                <span>Process</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Data Management System</h3>
+                            <p>Developed comprehensive data tracking and reporting system for organizational operations.</p>
+                            <div class="project-tags">
+                                <span>Data</span>
+                                <span>System</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Team Coordination Project</h3>
+                            <p>Led cross-functional team initiatives and coordinated successful organizational restructuring efforts.</p>
+                            <div class="project-tags">
+                                <span>Team</span>
+                                <span>Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section class="certificates" id="certificates">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Certificates & Achievements</h2>
+                    <div class="title-accent"></div>
+                </div>
+
+                <div class="certificates-grid">
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Top 10 Student Achievement</h3>
+                        <p>Universitas Negeri Surabaya</p>
+                        <p class="cert-year">2022 - 2025</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Student Council Leadership</h3>
+                        <p>3 Years of OSIS Experience</p>
+                        <p class="cert-year">2022 - 2025</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Professional Experience</h3>
+                        <p>PT Loket Premium Game Indonesia</p>
+                        <p class="cert-year">6 Months</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Field Work Internship</h3>
+                        <p>Practical Business Operations</p>
+                        <p class="cert-year">6 Months</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="title-accent"></div>
+                </div>
+
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email</h3>
+                            <a href="mailto:suryadwisaputra739@gmail.com">suryadwisaputra739@gmail.com</a>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="fas fa-phone"></i>
+                            <h3>WhatsApp</h3>
+                            <a href="https://wa.me/6285730819709" target="_blank" rel="noopener">+62 857 3081 9709</a>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Location</h3>
+                            <p>Surabaya, East Java, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/sryaasptraa" class="social-btn" title="Instagram" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/surya-dwi-saputra-48396b37a" class="social-btn" title="LinkedIn" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@sryaasptraa" class="social-btn" title="TikTok" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://wa.me/6285730819709" class="social-btn" title="WhatsApp" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="section-container">
+                <p>&copy; 2026 Surya Dwi Saputra. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
 
     <script src="script.js" defer></script>
 </body>

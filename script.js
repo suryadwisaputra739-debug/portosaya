@@ -1,9 +1,11 @@
 // ============================================
-// PREMIUM PORTFOLIO - MOBILE OPTIMIZED
+// INTERACTIVE INTRO SCREEN + PORTFOLIO
 // ============================================
 
 // DOM Elements
-const openingAnimation = document.getElementById('openingAnimation');
+const introScreen = document.getElementById('introScreen');
+const introButton = document.getElementById('introButton');
+const portfolioWrapper = document.getElementById('portfolioWrapper');
 const navbar = document.getElementById('navbar');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -13,21 +15,168 @@ const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const scrollProgress = document.getElementById('scrollProgress');
 const backToTop = document.getElementById('backToTop');
+const introParticles = document.getElementById('introParticles');
+
+let portfolioRevealed = false;
 
 // ============================================
-// OPENING ANIMATION TIMING
+// CREATE INTRO PARTICLES
 // ============================================
 
-window.addEventListener('load', () => {
+function createIntroParticles() {
+    if (!introParticles) return;
+    
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'intro-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.width = (Math.random() * 3 + 2) + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        introParticles.appendChild(particle);
+    }
+}
+
+createIntroParticles();
+
+// ============================================
+// INTRO BUTTON - CLICK HANDLER
+// ============================================
+
+introButton.addEventListener('click', handleIntroButtonClick);
+introButton.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        handleIntroButtonClick();
+    }
+});
+
+// Also listen for actual Enter key press anywhere
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !portfolioRevealed && introScreen.offsetParent !== null) {
+        handleIntroButtonClick();
+    }
+});
+
+function handleIntroButtonClick() {
+    if (portfolioRevealed) return;
+    
+    portfolioRevealed = true;
+    
+    // Add pressed state
+    introButton.classList.add('pressed');
+    
+    // Ripple effect
+    createRippleEffect(introButton);
+    
+    // Blur intro background briefly
+    introScreen.style.backdropFilter = 'blur(10px)';
+    
+    // Wait for mechanical press animation, then reveal
     setTimeout(() => {
-        if (openingAnimation) {
-            openingAnimation.style.opacity = '0';
-            openingAnimation.style.pointerEvents = 'none';
-            setTimeout(() => {
-                openingAnimation.style.display = 'none';
-            }, 800);
+        revealPortfolio();
+    }, 300);
+}
+
+// ============================================
+// RIPPLE EFFECT FOR BUTTON
+// ============================================
+
+function createRippleEffect(element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = size / 2;
+    const y = size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (x - size / 2) + 'px';
+    ripple.style.top = (y - size / 2) + 'px';
+    ripple.classList.add('ripple');
+    
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// ============================================
+// REVEAL PORTFOLIO - CINEMATIC TRANSITION
+// ============================================
+
+function revealPortfolio() {
+    // Make portfolio wrapper visible with fade animation
+    portfolioWrapper.classList.add('visible');
+    
+    // Fade out and hide intro screen
+    setTimeout(() => {
+        introScreen.classList.add('hidden');
+    }, 600);
+    
+    // Enable scrolling
+    document.body.style.overflow = 'auto';
+    
+    // Trigger scroll animations
+    setTimeout(() => {
+        triggerScrollRevealAnimations();
+    }, 800);
+}
+
+// ============================================
+// SCROLL REVEAL ANIMATIONS
+// ============================================
+
+function triggerScrollRevealAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-header, .about-text, .stat-card, .skill-card, .timeline-item, .project-card, .cert-card, .contact-card').forEach(el => {
+        el.style.opacity = '0';
+        revealObserver.observe(el);
+    });
+}
+
+// ============================================
+// INTRO BUTTON HOVER EFFECT - MOUSE TRACKING (DESKTOP ONLY)
+// ============================================
+
+document.addEventListener('mousemove', (e) => {
+    if (window.innerWidth > 768 && introScreen.offsetParent !== null) {
+        const button = introButton.querySelector('.button-cap');
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Subtle 3D tilt effect
+        const xRotation = (y / rect.height) * 5;
+        const yRotation = (x / rect.width) * -5;
+        
+        // Only apply if intro screen is visible
+        if (introScreen.classList.contains('hidden') === false) {
+            button.style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
         }
-    }, 2500);
+    }
+});
+
+// Reset tilt on mouse leave
+introButton.addEventListener('mouseleave', () => {
+    if (introButton.querySelector('.button-cap')) {
+        introButton.querySelector('.button-cap').style.transform = '';
+    }
 });
 
 // ============================================
@@ -188,30 +337,6 @@ if (backToTop) {
 }
 
 // ============================================
-// SCROLL REVEAL ANIMATIONS
-// ============================================
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.section-header, .about-text, .stat-card, .skill-card, .timeline-item, .project-card, .cert-card, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    revealObserver.observe(el);
-});
-
-// ============================================
 // COUNT UP ANIMATION FOR STATS
 // ============================================
 
@@ -219,7 +344,7 @@ let statsAnimated = false;
 
 function animateCounter(element, target) {
     let current = 0;
-    const increment = target / 60; // 60 frames animation
+    const increment = target / 60;
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -295,7 +420,6 @@ function createParticles() {
     const particleContainer = document.querySelector('.hero-particles');
     if (!particleContainer) return;
 
-    // Clear existing particles
     particleContainer.innerHTML = '';
     
     for (let i = 0; i < 5; i++) {
@@ -307,14 +431,14 @@ function createParticles() {
     }
 }
 
-createParticles();
-
 // ============================================
 // RIPPLE EFFECT ON CLICK
 // ============================================
 
-document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn, .mobile-btn-cv-download').forEach(button => {
+function addRippleToButton(button) {
     button.addEventListener('click', function(e) {
+        if (this.classList.contains('intro-button')) return; // Skip intro button
+        
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -332,18 +456,18 @@ document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn, .mobi
             ripple.remove();
         }, 600);
     });
-});
+}
 
-// ============================================
-// PREVENT SCROLL DURING OPENING ANIMATION
-// ============================================
-
-let openingComplete = false;
-
+// Add ripple to all buttons when portfolio is revealed
 setTimeout(() => {
-    openingComplete = true;
-    document.body.style.overflow = 'auto';
-}, 2500);
+    document.querySelectorAll('.btn-learn-more, .btn-cv-download, .social-btn, .mobile-btn-cv-download').forEach(button => {
+        addRippleToButton(button);
+    });
+}, 1000);
+
+// ============================================
+// PREVENT SCROLL DURING INTRO
+// ============================================
 
 document.body.style.overflow = 'hidden';
 
@@ -356,7 +480,6 @@ function isMobile() {
 }
 
 window.addEventListener('resize', () => {
-    // Close mobile menu on resize to desktop
     if (!isMobile() && mobileMenu.classList.contains('active')) {
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
@@ -366,24 +489,27 @@ window.addEventListener('resize', () => {
 });
 
 // ============================================
-// MICRO INTERACTIONS
+// MICRO INTERACTIONS - CARD SHADOWS
 // ============================================
 
-// Card hover effects with shadow
-document.querySelectorAll('.skill-card, .cert-card, .project-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.boxShadow = '0 30px 80px rgba(102, 126, 234, 0.4)';
+// Wait until portfolio is revealed
+setTimeout(() => {
+    document.querySelectorAll('.skill-card, .cert-card, .project-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 30px 80px rgba(102, 126, 234, 0.4)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '0 20px 60px rgba(102, 126, 234, 0.3)';
+        });
     });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.boxShadow = '0 20px 60px rgba(102, 126, 234, 0.3)';
-    });
-});
+}, 1000);
 
 // ============================================
 // CONSOLE MESSAGE
 // ============================================
 
-console.log('%c🌟 Welcome to Surya\'s Premium Portfolio', 'color: #667eea; font-size: 20px; font-weight: bold;');
-console.log('%c✨ Mobile-Optimized | Cinematic Animations | Professional Quality', 'color: #764ba2; font-size: 14px;');
-console.log('%c📧 Contact: suryadwisaputra739@gmail.com | 📱 WhatsApp: +62 857 3081 9709', 'color: #a0aec0; font-size: 12px;');
+console.log('%c🎮 INTERACTIVE INTRO SCREEN LOADED', 'color: #667eea; font-size: 20px; font-weight: bold;');
+console.log('%c✨ Press ENTER or click the button to explore the portfolio', 'color: #764ba2; font-size: 14px;');
+console.log('%c🚀 Premium 3D Mechanical Button | Cinematic Reveal | Mobile Optimized', 'color: #a0aec0; font-size: 12px;');
+console.log('%c📧 Contact: suryadwisaputra739@gmail.com | 📱 +62 857 3081 9709', 'color: #667eea; font-size: 11px;');
