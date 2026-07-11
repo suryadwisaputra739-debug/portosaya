@@ -182,12 +182,12 @@ document.addEventListener('mousemove', (e) => {
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        // Subtle 3D tilt following cursor, layered on top of the press transform
-        const xRotation = (y / rect.height) * 10;
-        const yRotation = (x / rect.width) * -10;
+        // Subtle 3D tilt following cursor, layered on top of the isometric press transform
+        const xRotation = (y / rect.height) * 8;
+        const yRotation = (x / rect.width) * -8;
 
         if (introScreen.classList.contains('hidden') === false && !introButton.classList.contains('pressed')) {
-            cap.style.transform = `translateZ(38px) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+            cap.style.transform = `translate(-50%, -50%) translateZ(72px) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
             if (reflection) {
                 reflection.style.transform = `rotate(${-18 + yRotation}deg) translate(${xRotation}px, ${yRotation}px)`;
             }
@@ -195,11 +195,11 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-// Reset tilt on mouse leave
+// Reset tilt on mouse leave (must keep the centering transform intact)
 introButton.addEventListener('mouseleave', () => {
     const cap = introButton.querySelector('.key-cap');
     const reflection = introButton.querySelector('.keycap-reflection');
-    if (cap) cap.style.transform = '';
+    if (cap) cap.style.transform = 'translate(-50%, -50%) translateZ(72px)';
     if (reflection) reflection.style.transform = '';
 });
 
