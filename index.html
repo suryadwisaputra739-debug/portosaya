@@ -17,51 +17,94 @@
 <body>
     <!-- Interactive Intro Screen -->
     <div class="intro-screen" id="introScreen">
+        <!-- Ambient Background -->
         <div class="intro-background">
-            <div class="intro-blur blur-1"></div>
-            <div class="intro-blur blur-2"></div>
-            <div class="intro-blur blur-3"></div>
-            <div class="intro-particles" id="introParticles"></div>
+            <div class="ambient-light light-1"></div>
+            <div class="ambient-light light-2"></div>
+            <div class="ambient-light light-3"></div>
+            <div class="ambient-particles" id="ambientParticles"></div>
         </div>
 
-        <div class="intro-content">
-            <div class="intro-button-container">
-                <!-- Mechanical Keycap: Base -> Switch -> Keycap -->
-                <div class="key-assembly" id="introButton" tabindex="0" role="button" aria-label="Enter portfolio">
-                    <!-- Base plate (keyboard deck) -->
-                    <div class="key-base">
-                        <div class="key-base-top"></div>
-                        <div class="key-base-well"></div>
+        <!-- Main Content Container -->
+        <div class="intro-content-wrapper">
+            <div class="intro-scene">
+                <!-- Base Plate -->
+                <div class="keyboard-base">
+                    <div class="base-inner">
+                        <div class="base-reflection"></div>
                     </div>
-                    <!-- Rim glow bleeding from cap onto deck -->
-                    <div class="key-rim-glow"></div>
-                    <!-- Switch stem (visible when key is pressed) -->
-                    <div class="key-switch">
-                        <div class="switch-stem"></div>
-                        <div class="switch-glow"></div>
-                    </div>
-                    <!-- Contact shadow on base -->
-                    <div class="key-contact-shadow"></div>
-                    <!-- Keycap (the visible pressable cap) -->
-                    <div class="key-cap">
-                        <div class="keycap-face">
-                            <span class="button-text">ENTER</span>
-                            <i class="fas fa-arrow-right button-icon"></i>
-                        </div>
-                        <div class="keycap-side keycap-side-front"></div>
-                        <div class="keycap-side keycap-side-right"></div>
-                        <div class="keycap-reflection"></div>
-                    </div>
-                    <!-- Ambient glow -->
-                    <div class="key-ambient-glow"></div>
                 </div>
+
+                <!-- Mechanical Switch -->
+                <div class="keyboard-switch">
+                    <div class="switch-stem"></div>
+                    <div class="switch-housing"></div>
+                </div>
+
+                <!-- Premium Keycap -->
+                <div class="mechanical-keycap" id="mechanicalKeycap">
+                    <!-- Keycap 3D Structure -->
+                    <div class="keycap-container">
+                        <!-- Top Surface with Lighting -->
+                        <div class="keycap-top">
+                            <div class="keycap-surface">
+                                <div class="surface-gradient"></div>
+                                <div class="surface-reflection"></div>
+                                <div class="surface-shine"></div>
+                            </div>
+                            
+                            <!-- Text Layer -->
+                            <div class="keycap-text">
+                                <span class="text-main">ENTER</span>
+                                <span class="text-icon">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Front Face -->
+                        <div class="keycap-front">
+                            <div class="front-gradient"></div>
+                        </div>
+
+                        <!-- Left Side -->
+                        <div class="keycap-left">
+                            <div class="side-gradient"></div>
+                        </div>
+
+                        <!-- Right Side -->
+                        <div class="keycap-right">
+                            <div class="side-gradient"></div>
+                        </div>
+
+                        <!-- Bottom Face -->
+                        <div class="keycap-bottom">
+                            <div class="bottom-inner"></div>
+                        </div>
+
+                        <!-- Glow Effect Layer -->
+                        <div class="keycap-glow"></div>
+                    </div>
+
+                    <!-- Light Bloom Effect -->
+                    <div class="keycap-bloom"></div>
+
+                    <!-- Ambient Occlusion (Shadow) -->
+                    <div class="keycap-shadow"></div>
+                </div>
+
+                <!-- Particles Around Keycap -->
+                <div class="keycap-particles" id="keycapParticles"></div>
             </div>
 
-            <div class="intro-hint">
-                <span class="hint-text">Press Enter to Explore</span>
+            <!-- Hint Text -->
+            <div class="intro-hint-text">
+                <span class="hint-primary">Press ENTER</span>
+                <span class="hint-secondary">or click the key</span>
             </div>
         </div>
 
+        <!-- Screen Overlay for Transition -->
         <div class="intro-overlay"></div>
     </div>
 

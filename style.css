@@ -1,5 +1,5 @@
 /* ============================================
-   PREMIUM PORTFOLIO - INTERACTIVE INTRO SCREEN
+   PREMIUM MECHANICAL KEYCAP - 3D INTRO SCREEN
    ============================================ */
 
 :root {
@@ -45,12 +45,8 @@ body {
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
-}
-
 /* ============================================
-   INTRO SCREEN - FULLSCREEN INTERACTIVE
+   INTRO SCREEN - FULLSCREEN
    ============================================ */
 
 .intro-screen {
@@ -58,13 +54,14 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary);
+    background: linear-gradient(135deg, #0f1729 0%, #1a2847 50%, #0f1729 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 5000;
     overflow: hidden;
     transition: opacity 0.8s ease-out 0.6s, visibility 0.8s ease-out 0.6s;
+    perspective: 1000px;
 }
 
 .intro-screen.hidden {
@@ -73,67 +70,109 @@ body {
     pointer-events: none;
 }
 
+/* ============================================
+   AMBIENT LIGHTING & BACKGROUND
+   ============================================ */
+
 .intro-background {
     position: absolute;
     inset: 0;
     overflow: hidden;
 }
 
-.intro-blur {
+.ambient-light {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.2;
+    filter: blur(120px);
+    opacity: 0.15;
+    mix-blend-mode: screen;
 }
 
-.blur-1 {
-    width: 600px;
-    height: 600px;
-    background: var(--secondary);
+.light-1 {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.4), transparent);
     top: -200px;
     left: -200px;
-    animation: floatBlur 15s ease-in-out infinite;
+    animation: ambientFloat 20s ease-in-out infinite;
 }
 
-.blur-2 {
-    width: 500px;
-    height: 500px;
-    background: var(--accent);
+.light-2 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(118, 75, 162, 0.3), transparent);
     bottom: -150px;
     right: -150px;
-    animation: floatBlur 18s ease-in-out infinite;
-    animation-delay: 2s;
+    animation: ambientFloat 25s ease-in-out infinite;
+    animation-delay: 3s;
 }
 
-.blur-3 {
-    width: 400px;
-    height: 400px;
-    background: var(--secondary);
+.light-3 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.25), transparent);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: floatBlur 20s ease-in-out infinite;
-    animation-delay: 4s;
+    animation: ambientFloat 22s ease-in-out infinite;
+    animation-delay: 6s;
 }
 
-@keyframes floatBlur {
+@keyframes ambientFloat {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(50px, -50px) scale(1.1); }
+    50% { transform: translate(30px, -30px) scale(1.05); }
 }
 
-.intro-particles {
+/* ============================================
+   AMBIENT PARTICLES
+   ============================================ */
+
+.ambient-particles {
     position: absolute;
     inset: 0;
 }
 
-.intro-content {
+.ambient-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--secondary);
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(1px);
+    animation: particleFloat 25s infinite ease-in;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) translateX(var(--x-offset, 50px));
+    }
+}
+
+/* ============================================
+   INTRO CONTENT WRAPPER
+   ============================================ */
+
+.intro-content-wrapper {
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4rem;
+    gap: 5rem;
+    perspective: 1200px;
     animation: fadeInContent 0.8s ease-out;
 }
 
@@ -149,451 +188,549 @@ body {
 }
 
 /* ============================================
-   MECHANICAL KEYCAP — ISOMETRIC CAMERA VIEW
-   Base deck / switch / elevated keycap, viewed
-   from an angled top-front perspective
+   3D SCENE - KEYCAP SETUP
    ============================================ */
 
-.intro-button-container {
+.intro-scene {
     position: relative;
     width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+}
+
+/* ============================================
+   KEYBOARD BASE PLATE
+   ============================================ */
+
+.keyboard-base {
+    position: absolute;
+    bottom: 0;
+    width: 280px;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.95));
+    border-radius: 12px;
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+    transform: translateZ(0);
+    animation: baseGlow 3s ease-in-out infinite;
+}
+
+@keyframes baseGlow {
+    0%, 100% {
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.7),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        box-shadow: 
+            0 20px 60px rgba(102, 126, 234, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.base-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.05), rgba(50, 50, 60, 0.1));
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.base-reflection {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+    top: 0;
+}
+
+/* ============================================
+   MECHANICAL SWITCH
+   ============================================ */
+
+.keyboard-switch {
+    position: absolute;
+    bottom: 80px;
+    width: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 440px;
-    perspective: 1900px;
+    transform: translateZ(20px);
 }
 
-/* Outer assembly: fixed isometric tilt + gentle breathing float */
-.key-assembly {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    outline: none;
-    animation: keyBreathe 5s ease-in-out infinite;
-}
-
-/* Idle: isometric baseline with subtle organic drift */
-@keyframes keyBreathe {
-    0%, 100% {
-        transform: translateY(0)    rotateX(54deg) rotateZ(-15deg);
-    }
-    25% {
-        transform: translateY(-7px) rotateX(52deg) rotateZ(-13deg);
-    }
-    50% {
-        transform: translateY(-12px) rotateX(56deg) rotateZ(-16deg);
-    }
-    75% {
-        transform: translateY(-7px) rotateX(53deg) rotateZ(-14deg);
-    }
-}
-
-/* ---- BASE DECK (large plate the key sits on, clearly visible) ---- */
-.key-base {
+.switch-housing {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 300px;
-    height: 300px;
-    transform: translate(-50%, -50%) translateZ(-64px);
-    border-radius: 38px;
-    background:
-        radial-gradient(circle at 32% 28%, rgba(102,126,234,0.10), transparent 55%),
-        linear-gradient(155deg, #1b2138 0%, #10142a 55%, #090b18 100%);
-    box-shadow:
-        0 60px 90px rgba(0,0,0,0.65),
-        0 8px 20px rgba(0,0,0,0.5),
-        inset 0 2px 3px rgba(255,255,255,0.06),
-        inset 0 -10px 24px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.07);
-}
-
-/* Subtle plate texture: faint concentric sheen */
-.key-base-top {
-    position: absolute;
-    inset: 14px;
-    border-radius: 28px;
-    background: linear-gradient(155deg, rgba(102,126,234,0.08), transparent 55%);
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.07);
-}
-
-/* Recessed well beneath the keycap — implies the socket it sits in */
-.key-base-well {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 210px;
-    height: 210px;
-    transform: translate(-50%, -50%) translateZ(-2px);
-    border-radius: 30px;
-    background: radial-gradient(circle, rgba(0,0,0,0.55) 0%, transparent 70%);
-    filter: blur(2px);
-}
-
-/* ---- SWITCH (short stem, mostly hidden beneath cap, gives contact glow) ---- */
-.key-switch {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 40px;
-    height: 40px;
-    transform: translate(-50%, -50%) translateZ(-28px);
+    width: 100px;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(30, 30, 40, 0.6), rgba(15, 15, 25, 0.8));
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    border-radius: 4px;
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.05),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .switch-stem {
     position: absolute;
-    inset: 0;
-    margin: auto;
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    background: linear-gradient(180deg, #3a4468 0%, #232a44 60%, #171b2e 100%);
-    box-shadow:
-        inset 1px 0 2px rgba(255,255,255,0.12),
-        inset -1px 0 2px rgba(0,0,0,0.5);
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.15), rgba(102, 126, 234, 0.05));
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 2px;
+    transform: translateZ(10px);
+    z-index: 5;
 }
 
-.switch-glow {
-    position: absolute;
-    inset: -20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(120,140,255,0.6), transparent 70%);
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
+/* ============================================
+   PREMIUM 3D MECHANICAL KEYCAP
+   ============================================ */
 
-/* ---- KEYCAP (elevated, pressable cap) ---- */
-.key-cap {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 210px;
-    height: 210px;
-    transform: translate(-50%, -50%) translateZ(72px);
-    transform-style: preserve-3d;
-    transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Extruded side walls give the cap real thickness */
-.keycap-side {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 210px;
-    height: 34px;
-    transform-origin: top center;
-    border-radius: 0 0 26px 26px;
-}
-
-.keycap-side-front {
-    transform: translateX(-50%) rotateX(-90deg) translateY(17px);
-    background: linear-gradient(180deg, rgba(96,112,175,0.6) 0%, rgba(28,33,56,0.92) 100%);
-    box-shadow: inset 0 -8px 14px rgba(0,0,0,0.55);
-}
-
-.keycap-side-right {
-    width: 34px;
-    height: 210px;
-    left: auto;
-    right: 0;
-    bottom: 0;
-    border-radius: 0 26px 26px 0;
-    transform: translateY(0) rotateY(90deg) translateX(17px);
-    transform-origin: left center;
-    background: linear-gradient(90deg, rgba(80,95,152,0.55) 0%, rgba(22,26,46,0.92) 100%);
-    box-shadow: inset -8px 0 14px rgba(0,0,0,0.5);
-}
-
-/* Top glass/acrylic face */
-.keycap-face {
+.mechanical-keycap {
     position: relative;
-    width: 210px;
-    height: 210px;
-    margin: 0 auto;
-    border-radius: 26px;
+    width: 160px;
+    height: 160px;
+    perspective: 1200px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    animation: keycapIdle 3.5s ease-in-out infinite;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 20;
+}
+
+@keyframes keycapIdle {
+    0%, 100% {
+        transform: translateY(0) rotateZ(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotateZ(-1deg);
+    }
+    50% {
+        transform: translateY(-25px) rotateZ(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotateZ(1deg);
+    }
+}
+
+.mechanical-keycap:hover {
+    transform: translateY(-35px) scale(1.05);
+}
+
+.mechanical-keycap.pressed {
+    animation: none !important;
+    transform: translateY(12px) !important;
+}
+
+/* ============================================
+   KEYCAP CONTAINER - 3D STRUCTURE
+   ============================================ */
+
+.keycap-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Main Top Surface */
+.keycap-top {
+    position: absolute;
+    width: 160px;
+    height: 140px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, 
+        rgba(150, 160, 220, 0.4) 0%,
+        rgba(120, 140, 200, 0.3) 50%,
+        rgba(100, 120, 180, 0.25) 100%);
+    border-radius: 12px 12px 8px 8px;
+    border: 1px solid rgba(150, 170, 230, 0.4);
+    transform: translateZ(35px);
+    box-shadow: 
+        0 0 60px rgba(102, 126, 234, 0.5),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.7rem;
-
-    background:
-        radial-gradient(circle at 30% 22%, rgba(255,255,255,0.24), transparent 45%),
-        linear-gradient(150deg, rgba(112,132,214,0.4) 0%, rgba(76,58,140,0.3) 45%, rgba(20,24,42,0.7) 100%);
-    backdrop-filter: blur(18px) saturate(140%);
-    border: 1.5px solid rgba(255,255,255,0.3);
-
-    box-shadow:
-        inset 2px 2px 3px rgba(255,255,255,0.38),
-        inset -3px -4px 8px rgba(0,0,0,0.35),
-        0 22px 40px rgba(5,8,20,0.6),
-        0 0 56px rgba(102,126,234,0.4);
-
-    transition: box-shadow 0.25s ease, background 0.25s ease;
+    gap: 1rem;
     overflow: hidden;
+    position: relative;
 }
 
-.keycap-reflection {
+.keycap-top::before {
+    content: '';
     position: absolute;
-    top: -30%;
-    left: -20%;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 20%, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 12px 12px 8px 8px;
+    pointer-events: none;
+    animation: glowBreathe 2s ease-in-out infinite;
+}
+
+@keyframes glowBreathe {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+/* Surface Details */
+.keycap-surface {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px 12px 8px 8px;
+}
+
+.surface-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 12px 12px 8px 8px;
+}
+
+.surface-reflection {
+    position: absolute;
     width: 60%;
-    height: 160%;
-    background: linear-gradient(115deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.06) 35%, transparent 60%);
-    transform: rotate(-18deg);
-    pointer-events: none;
-    filter: blur(2px);
-    transition: transform 0.4s ease;
-}
-
-.button-text {
-    font-size: 1.85em;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: #f3f5ff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.35), 0 0 18px rgba(150,170,255,0.4);
-    z-index: 2;
-    position: relative;
-}
-
-.button-icon {
-    font-size: 1.2em;
-    color: #b9c4ff;
-    animation: slideArrow 1.5s ease-in-out infinite;
-    z-index: 2;
-    position: relative;
-    filter: drop-shadow(0 0 6px rgba(150,170,255,0.5));
-}
-
-@keyframes slideArrow {
-    0%, 100% { transform: translateX(0); opacity: 0.7; }
-    50%      { transform: translateX(8px); opacity: 1; }
-}
-
-/* ---- Rim glow: bleeds from the cap's base onto the deck (signature look) ---- */
-.key-rim-glow {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 260px;
-    height: 260px;
-    transform: translate(-50%, -50%) translateZ(-8px);
+    height: 50%;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.4), transparent);
+    top: 10%;
+    left: 20%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(102,126,234,0.5) 0%, rgba(102,126,234,0.15) 45%, transparent 72%);
-    filter: blur(18px);
-    opacity: 0.55;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
+    filter: blur(20px);
 }
 
-/* ---- Contact shadow the cap casts onto the deck ---- */
-.key-contact-shadow {
+.surface-shine {
     position: absolute;
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    top: 15%;
     left: 50%;
-    top: 50%;
-    width: 190px;
-    height: 190px;
-    transform: translate(-50%, -50%) translateZ(-60px);
-    background: radial-gradient(circle, rgba(0,0,0,0.55) 0%, transparent 70%);
-    filter: blur(10px);
+    transform: translateX(-50%);
     border-radius: 50%;
-    transition: all 0.2s ease;
+    filter: blur(8px);
+    animation: shineMove 4s ease-in-out infinite;
 }
 
-/* ---- Ambient product bloom around the whole assembly ---- */
-.key-ambient-glow {
-    position: absolute;
-    inset: -80px;
-    background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, transparent 68%);
-    filter: blur(36px);
-    pointer-events: none;
-    animation: ambientPulse 3.2s ease-in-out infinite;
-    z-index: -1;
+@keyframes shineMove {
+    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.8; transform: translateX(-50%) translateY(30px); }
 }
 
-@keyframes ambientPulse {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50%      { opacity: 0.85; transform: scale(1.08); }
-}
-
-/* ============================================
-   HOVER STATE — glow up, lift, mouse-follow tilt
-   ============================================ */
-.key-assembly:hover {
-    animation-play-state: paused;
-}
-
-.key-assembly:hover .keycap-face {
-    box-shadow:
-        inset 2px 2px 3px rgba(255,255,255,0.5),
-        inset -3px -4px 8px rgba(0,0,0,0.3),
-        0 30px 56px rgba(5,8,20,0.65),
-        0 0 80px rgba(102,126,234,0.6);
-}
-
-.key-assembly:hover .switch-glow {
-    opacity: 0.75;
-}
-
-.key-assembly:hover .key-ambient-glow {
-    opacity: 1;
-}
-
-.key-assembly:hover .key-rim-glow {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) translateZ(-8px) scale(1.08);
-}
-
-/* ============================================
-   PRESSED STATE — full mechanical sequence
-   Keycap sinks -> shadow shrinks -> glow dims ->
-   base reveals -> ripple -> bounce back
-   ============================================ */
-.key-assembly.pressed .key-cap {
-    transform: translate(-50%, -50%) translateZ(24px);
-    transition: transform 0.11s cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-.key-assembly.pressed .keycap-face {
-    box-shadow:
-        inset 2px 2px 3px rgba(255,255,255,0.2),
-        inset -2px -3px 6px rgba(0,0,0,0.4),
-        0 6px 14px rgba(5,8,20,0.5),
-        0 0 18px rgba(102,126,234,0.18);
-}
-
-.key-assembly.pressed .key-contact-shadow {
-    width: 140px;
-    height: 140px;
-    opacity: 0.4;
-}
-
-.key-assembly.pressed .key-ambient-glow {
-    opacity: 0.15;
-    animation: none;
-}
-
-.key-assembly.pressed .key-rim-glow {
-    opacity: 0.2;
-}
-
-.key-assembly.pressed .switch-glow {
-    opacity: 1;
-}
-
-/* Bounce-back after release */
-.key-assembly.bounce .key-cap {
-    animation: keycapBounce 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes keycapBounce {
-    0%   { transform: translate(-50%, -50%) translateZ(24px); }
-    55%  { transform: translate(-50%, -50%) translateZ(84px); }
-    80%  { transform: translate(-50%, -50%) translateZ(64px); }
-    100% { transform: translate(-50%, -50%) translateZ(72px); }
-}
-
-/* Click ripple (mechanical, radiates from switch) */
-.key-ripple {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(150,170,255,0.5), transparent 70%);
-    transform: translate(-50%, -50%) scale(0);
-    pointer-events: none;
-    animation: keyRippleOut 0.7s ease-out forwards;
-    z-index: 5;
-}
-
-@keyframes keyRippleOut {
-    0%   { transform: translate(-50%, -50%) scale(0);  opacity: 0.9; }
-    100% { transform: translate(-50%, -50%) scale(16); opacity: 0; }
-}
-
-/* ============================================
-   INTRO HINT TEXT
-   ============================================ */
-
-.intro-hint {
+/* Text Layer */
+.keycap-text {
     position: relative;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     text-align: center;
 }
 
-.hint-text {
-    display: inline-block;
-    font-size: 1.1em;
-    color: var(--text-light);
-    font-weight: 500;
-    letter-spacing: 2px;
-    animation: hintFadeInOut 2.5s ease-in-out infinite;
+.text-main {
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(150, 170, 230, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
-@keyframes hintFadeInOut {
-    0%, 100% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 1;
-    }
+.text-icon {
+    display: block;
+    font-size: 1.2em;
+    color: rgba(150, 170, 230, 0.9);
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* Front Face - 3D */
+.keycap-front {
+    position: absolute;
+    width: 160px;
+    height: 20px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(100, 120, 180, 0.25), rgba(70, 80, 140, 0.35));
+    border: 1px solid rgba(100, 120, 180, 0.2);
+    transform: rotateX(55deg) translateZ(-10px);
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.front-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, 
+        rgba(150, 170, 230, 0.2) 0%,
+        rgba(100, 120, 180, 0.1) 100%);
+}
+
+/* Left Side - 3D */
+.keycap-left {
+    position: absolute;
+    width: 20px;
+    height: 140px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, rgba(80, 100, 160, 0.35), rgba(100, 120, 180, 0.2));
+    border: 1px solid rgba(80, 100, 160, 0.25);
+    transform: rotateY(-55deg) translateZ(-10px);
+    border-radius: 12px 0 0 8px;
+    box-shadow: inset 1px 0 2px rgba(255, 255, 255, 0.05);
+}
+
+.side-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+        rgba(60, 80, 140, 0.2) 0%,
+        transparent 100%);
+}
+
+/* Right Side - 3D */
+.keycap-right {
+    position: absolute;
+    width: 20px;
+    height: 140px;
+    top: 0;
+    right: 0;
+    background: linear-gradient(90deg, rgba(100, 120, 180, 0.2), rgba(80, 100, 160, 0.35));
+    border: 1px solid rgba(80, 100, 160, 0.25);
+    transform: rotateY(55deg) translateZ(-10px);
+    border-radius: 0 12px 8px 0;
+    box-shadow: inset -1px 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Bottom Face - 3D */
+.keycap-bottom {
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    bottom: -20px;
+    left: 10px;
+    background: linear-gradient(180deg, rgba(40, 50, 100, 0.4), rgba(30, 40, 80, 0.5));
+    border: 1px solid rgba(50, 70, 120, 0.3);
+    transform: rotateX(-85deg) translateZ(-10px);
+    border-radius: 6px;
+}
+
+.bottom-inner {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(60, 80, 140, 0.15) 0%,
+        rgba(40, 60, 120, 0.1) 100%);
 }
 
 /* ============================================
-   AMBIENT DRIFT PARTICLES (around keycap, subtle)
+   KEYCAP GLOW & LIGHTING EFFECTS
    ============================================ */
 
-.intro-particle {
+.keycap-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at 50% 40%, 
+        rgba(102, 126, 234, 0.4) 0%,
+        rgba(102, 126, 234, 0.2) 30%,
+        transparent 70%);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: glowPulse 2.5s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+/* Bloom Effect */
+.keycap-bloom {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle at 50% 50%, 
+        rgba(102, 126, 234, 0.15) 0%,
+        transparent 80%);
+    border-radius: 50%;
+    filter: blur(50px);
+    animation: bloomPulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes bloomPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
+}
+
+/* Shadow / Ambient Occlusion */
+.keycap-shadow {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 30px;
+    background: radial-gradient(ellipse 100% 50% at 50% 100%, 
+        rgba(102, 126, 234, 0.3) 0%,
+        rgba(102, 126, 234, 0.1) 50%,
+        transparent 100%);
+    filter: blur(15px);
+    animation: shadowPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateX(-50%) scaleY(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scaleY(1.2);
+    }
+}
+
+.mechanical-keycap.pressed .keycap-shadow {
+    animation: none !important;
+    opacity: 0.2;
+    transform: translateX(-50%) scaleY(0.6) !important;
+}
+
+/* ============================================
+   KEYCAP PARTICLES
+   ============================================ */
+
+.keycap-particles {
+    position: absolute;
+    inset: -100px;
+    z-index: -5;
+}
+
+.keycap-particle {
     position: absolute;
     width: 3px;
     height: 3px;
     background: var(--secondary);
     border-radius: 50%;
-    opacity: 0.35;
-    filter: blur(0.5px);
-    animation: floatParticle 20s infinite ease-in;
+    opacity: 0.4;
+    filter: blur(1px);
+    animation: keycapParticleFloat 20s infinite ease-in;
 }
 
-@keyframes floatParticle {
+@keyframes keycapParticleFloat {
     0% {
         opacity: 0;
-        transform: translateY(0) translateX(0);
+        transform: translate(0, 0);
     }
-    10% {
-        opacity: 0.6;
+    5% {
+        opacity: 0.4;
     }
-    90% {
-        opacity: 0.6;
+    95% {
+        opacity: 0.4;
     }
     100% {
         opacity: 0;
-        transform: translateY(-100vh) translateX(50px);
+        transform: translate(var(--tx, 0), var(--ty, -100px));
     }
 }
 
 /* ============================================
-   PORTFOLIO WRAPPER - HIDDEN INITIALLY
+   HINT TEXT
    ============================================ */
 
-.portfolio-wrapper {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+.intro-hint-text {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
 }
 
-.portfolio-wrapper.visible {
-    opacity: 1;
-    visibility: visible;
+.hint-primary {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 2px;
+    animation: hintPulse 2.5s ease-in-out infinite;
+}
+
+.hint-secondary {
+    display: block;
+    font-size: 0.9em;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    animation: hintPulse 2.5s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+@keyframes hintPulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
 }
 
 /* ============================================
-   SCROLL PROGRESS BAR
+   INTRO OVERLAY (TRANSITION)
+   ============================================ */
+
+.intro-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-out;
+}
+
+.intro-screen.hidden .intro-overlay {
+    opacity: 1;
+}
+
+/* ============================================
+   REST OF STYLES (Portfolio)
    ============================================ */
 
 .scroll-progress {
@@ -606,10 +743,6 @@ body {
     z-index: 999;
     transition: width 0.3s ease;
 }
-
-/* ============================================
-   FLOATING BACKGROUND
-   ============================================ */
 
 .floating-bg {
     position: fixed;
@@ -660,8 +793,19 @@ body {
     50% { transform: translateY(-50px) rotate(180deg); }
 }
 
+.portfolio-wrapper {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.portfolio-wrapper.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* ============================================
-   NAVIGATION
+   NAVBAR
    ============================================ */
 
 .navbar {
@@ -768,24 +912,9 @@ body {
     z-index: 110;
 }
 
-.btn-cv-download::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.1);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-    z-index: -1;
-}
-
 .btn-cv-download:hover {
     transform: translateY(-3px);
     box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
-}
-
-.btn-cv-download:hover::before {
-    transform: scaleX(1);
 }
 
 /* ============================================
@@ -891,7 +1020,6 @@ body {
     display: block;
     opacity: 0;
     transform: translateX(-20px);
-    animation: none;
 }
 
 .mobile-menu.active .mobile-nav-link {
@@ -958,7 +1086,6 @@ body {
     margin-top: 1rem;
     opacity: 0;
     transform: translateY(20px);
-    animation: none;
 }
 
 .mobile-menu.active .mobile-btn-cv-download {
@@ -1016,12 +1143,6 @@ section {
     height: 4px;
     background: linear-gradient(90deg, var(--secondary), var(--accent));
     border-radius: 2px;
-    animation: slideRight 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes slideRight {
-    from { width: 0; }
-    to { width: 80px; }
 }
 
 /* ============================================
@@ -1275,17 +1396,6 @@ section {
     position: relative;
 }
 
-.stat-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
 .stat-card:nth-child(1) { animation-delay: 0.3s; }
 .stat-card:nth-child(2) { animation-delay: 0.4s; }
 .stat-card:nth-child(3) { animation-delay: 0.5s; }
@@ -1295,10 +1405,6 @@ section {
     border-color: var(--secondary);
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
-}
-
-.stat-card:hover::before {
-    opacity: 1;
 }
 
 .stat-number {
@@ -1409,12 +1515,7 @@ section {
     background: linear-gradient(90deg, var(--secondary), var(--accent));
     border-radius: 3px;
     width: var(--progress);
-    animation: skillFill 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-}
-
-@keyframes skillFill {
-    from { width: 0; }
 }
 
 /* ============================================
@@ -1841,7 +1942,7 @@ section {
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE DESIGN
    ============================================ */
 
 @media (max-width: 1024px) {
@@ -1860,6 +1961,15 @@ section {
 
     .about-stats {
         grid-template-columns: 1fr;
+    }
+
+    .intro-scene {
+        height: 350px;
+    }
+
+    .mechanical-keycap {
+        width: 140px;
+        height: 140px;
     }
 }
 
@@ -1940,78 +2050,35 @@ section {
         padding: 100px 0 2rem;
     }
 
-    .intro-button-container {
-        height: 340px;
-        perspective: 1600px;
+    .intro-scene {
+        height: 300px;
     }
 
-    .key-assembly {
-        width: 240px;
-        height: 240px;
-        animation-duration: 5s;
+    .mechanical-keycap {
+        width: 120px;
+        height: 120px;
+        animation: keycapIdleMobile 3.5s ease-in-out infinite;
     }
 
-    .key-base {
-        width: 225px;
-        height: 225px;
-        border-radius: 28px;
+    @keyframes keycapIdleMobile {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
     }
 
-    .key-base-well {
-        width: 158px;
-        height: 158px;
-        border-radius: 22px;
+    .intro-hint-text {
+        gap: 0.3rem;
     }
 
-    .key-switch {
-        width: 30px;
-        height: 30px;
-    }
-
-    .switch-stem {
-        width: 12px;
-        height: 12px;
-        border-radius: 3px;
-    }
-
-    .key-cap {
-        width: 158px;
-        height: 158px;
-    }
-
-    .keycap-side {
-        width: 158px;
-        height: 26px;
-    }
-
-    .keycap-side-right {
-        width: 26px;
-        height: 158px;
-    }
-
-    .keycap-face {
-        width: 158px;
-        height: 158px;
-        border-radius: 20px;
-    }
-
-    .key-rim-glow {
-        width: 195px;
-        height: 195px;
-    }
-
-    .key-contact-shadow {
-        width: 142px;
-        height: 142px;
-    }
-
-    .button-text {
-        font-size: 1.4em;
-        letter-spacing: 2px;
-    }
-
-    .button-icon {
+    .hint-primary {
         font-size: 1em;
+    }
+
+    .hint-secondary {
+        font-size: 0.85em;
     }
 }
 
@@ -2064,123 +2131,37 @@ section {
         padding: 12px 16px;
     }
 
-    .intro-button-container {
-        height: 260px;
-        perspective: 1300px;
+    .intro-content-wrapper {
+        gap: 3rem;
     }
 
-    .key-assembly {
-        width: 175px;
-        height: 175px;
+    .intro-scene {
+        height: 250px;
     }
 
-    .key-base {
-        width: 164px;
-        height: 164px;
-        border-radius: 20px;
+    .mechanical-keycap {
+        width: 100px;
+        height: 100px;
     }
 
-    .key-base-well {
-        width: 115px;
-        height: 115px;
-        border-radius: 16px;
+    .keyboard-base {
+        width: 220px;
+        height: 60px;
     }
 
-    .key-switch {
-        width: 22px;
-        height: 22px;
+    .keycap-top {
+        width: 120px;
+        height: 100px;
     }
 
-    .switch-stem {
-        width: 9px;
-        height: 9px;
-        border-radius: 2px;
+    .text-main {
+        font-size: 1.5em;
+        letter-spacing: 2px;
     }
 
-    .key-cap {
-        width: 115px;
-        height: 115px;
+    .text-icon {
+        font-size: 1em;
     }
-
-    .keycap-side {
-        width: 115px;
-        height: 19px;
-    }
-
-    .keycap-side-right {
-        width: 19px;
-        height: 115px;
-    }
-
-    .keycap-face {
-        width: 115px;
-        height: 115px;
-        border-radius: 15px;
-    }
-
-    .key-rim-glow {
-        width: 142px;
-        height: 142px;
-    }
-
-    .key-contact-shadow {
-        width: 104px;
-        height: 104px;
-    }
-
-    .button-text {
-        font-size: 1.05em;
-        letter-spacing: 1px;
-    }
-
-    .button-icon {
-        font-size: 0.85em;
-    }
-
-    .intro-hint {
-        gap: 1rem;
-    }
-
-    .hint-text {
-        font-size: 0.95em;
-        letter-spacing: 1px;
-    }
-}
-
-/* ============================================
-   ANIMATIONS & UTILITIES
-   ============================================ */
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(0);
-    animation: ripple 0.6s ease-out;
-    pointer-events: none;
-}
-
-/* ============================================
-   ACCESSIBILITY
-   ============================================ */
-
-button:focus,
-a:focus,
-input:focus {
-    outline: 2px solid var(--secondary);
-    outline-offset: 2px;
 }
 
 /* ============================================
